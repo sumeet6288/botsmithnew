@@ -268,6 +268,35 @@ const AdvancedUsersManagement = ({ backendUrl }) => {
     }
   };
 
+  const handleDirectLogin = async (userId) => {
+    try {
+      // Show loading state
+      const loadingToast = alert('Generating secure login link...');
+      
+      // Generate impersonation token
+      const response = await fetch(`${backendUrl}/api/admin/impersonation/generate-token/${userId}`, {
+        method: 'POST'
+      });
+      
+      const data = await response.json();
+      
+      if (data.success && data.impersonation_token) {
+        // Build the full URL with token
+        const impersonationUrl = `${window.location.origin}/admin-login?token=${data.impersonation_token}`;
+        
+        // Open in new tab
+        window.open(impersonationUrl, '_blank');
+        
+        alert(`Direct login session created for ${data.user_email}!\n\nOpening in new tab...`);
+      } else {
+        alert('Failed to generate login link');
+      }
+    } catch (error) {
+      console.error('Error generating direct login:', error);
+      alert('Error: Unable to generate direct login link');
+    }
+  };
+
   const handleVerifyEmail = async (userId) => {
     if (!window.confirm('Manually verify this user\'s email?')) return;
     
