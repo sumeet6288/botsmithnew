@@ -50,6 +50,7 @@ import CookiePolicy from './pages/CookiePolicy';
 import NotFound from './pages/NotFound';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminLoginImpersonation from './pages/AdminLoginImpersonation';
+import ImpersonationBanner from './components/ImpersonationBanner';
 import { Toaster } from './components/ui/toaster';
 import { Toaster as SonnerToaster } from 'sonner';
 import SubscriptionExpiredModal from './components/SubscriptionExpiredModal';
