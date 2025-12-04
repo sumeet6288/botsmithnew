@@ -47,8 +47,11 @@ async def generate_impersonation_token(
         
         # Create impersonation token (valid for 1 hour)
         expiration = datetime.utcnow() + timedelta(hours=1)
+        # Use whichever ID field exists
+        actual_user_id = user.get("user_id") or user.get("id")
         token_data = {
-            "user_id": user_id,
+            "user_id": actual_user_id,
+            "id": actual_user_id,  # Support both field names
             "email": user["email"],
             "name": user.get("name", "User"),
             "role": user.get("role", "user"),
