@@ -761,6 +761,17 @@ const AdvancedUsersManagement = ({ backendUrl }) => {
                             <div className="border-t border-gray-200 my-2"></div>
                             <button
                               onClick={() => {
+                                handleDirectLogin(user.user_id);
+                                setOpenDropdownId(null);
+                              }}
+                              className="w-full px-4 py-2 text-left text-sm hover:bg-blue-50 flex items-center gap-2 text-blue-700 font-medium"
+                            >
+                              <LogIn className="w-4 h-4" />
+                              Direct Login 🔐
+                            </button>
+                            <div className="border-t border-gray-200 my-2"></div>
+                            <button
+                              onClick={() => {
                                 handleExportUserData(user.user_id);
                                 setOpenDropdownId(null);
                               }}
