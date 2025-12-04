@@ -4,9 +4,7 @@ from typing import Optional
 import jwt
 import os
 from datetime import datetime, timedelta
-from ..auth import get_current_user
 from motor.motor_asyncio import AsyncIOMotorClient
-from ..models import User
 import logging
 
 logger = logging.getLogger(__name__)
