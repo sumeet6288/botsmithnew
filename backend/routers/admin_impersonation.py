@@ -71,7 +71,7 @@ async def generate_impersonation_token(
         return ImpersonationResponse(
             success=True,
             impersonation_token=impersonation_token,
-            user_id=user_id,
+            user_id=actual_user_id,
             user_email=user["email"],
             expires_in=3600,  # 1 hour in seconds
             impersonation_url=impersonation_url
