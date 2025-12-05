@@ -270,24 +270,21 @@ const AdvancedUsersManagement = ({ backendUrl }) => {
 
   const handleDirectLogin = async (userId) => {
     try {
-      // Show loading state
-      const loadingToast = alert('Generating secure login link...');
-      
-      // Generate impersonation token
-      const response = await fetch(`${backendUrl}/api/admin/impersonation/generate-token/${userId}`, {
+      // Generate direct login token
+      const response = await fetch(`${backendUrl}/api/admin/direct-login/generate-token/${userId}`, {
         method: 'POST'
       });
       
       const data = await response.json();
       
-      if (data.success && data.impersonation_token) {
+      if (data.success && data.token) {
         // Build the full URL with token
-        const impersonationUrl = `${window.location.origin}/admin-login?token=${data.impersonation_token}`;
+        const loginUrl = `${window.location.origin}/direct-login?token=${data.token}`;
         
         // Open in new tab
-        window.open(impersonationUrl, '_blank');
+        window.open(loginUrl, '_blank');
         
-        alert(`Direct login session created for ${data.user_email}!\n\nOpening in new tab...`);
+        alert(`Direct login link created for ${data.user_email}!\n\nOpening in new tab...`);
       } else {
         alert('Failed to generate login link');
       }
