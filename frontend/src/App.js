@@ -173,7 +173,7 @@ function AppContent() {
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/admin-login" element={<AdminLoginImpersonation />} />
+            <Route path="/direct-login" element={<DirectLogin />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/subscription" element={<Subscription />} />
