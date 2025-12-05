@@ -17,12 +17,12 @@
 
 ### **Live Application URL**
 ```
-https://user-login-fix-2.preview.emergentagent.com
+https://dev-env-builder-1.preview.emergentagent.com
 ```
 
 ### **API Documentation**
 ```
-https://user-login-fix-2.preview.emergentagent.com/docs
+https://dev-env-builder-1.preview.emergentagent.com/docs
 ```
 
 ---
@@ -148,7 +148,7 @@ tail -f /var/log/supervisor/frontend.out.log
 
 ### Frontend (`/app/frontend/.env`)
 ```env
-REACT_APP_BACKEND_URL=https://user-login-fix-2.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://dev-env-builder-1.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 REACT_APP_ENABLE_VISUAL_EDITS=true
 ENABLE_HEALTH_CHECK=false
@@ -308,7 +308,7 @@ sudo supervisorctl restart frontend
 
 Your BotSmith AI application is fully set up and ready to use. Login with the admin credentials and start building amazing AI-powered chatbots!
 
-**Application URL:** https://user-login-fix-2.preview.emergentagent.com
+**Application URL:** https://dev-env-builder-1.preview.emergentagent.com
 
 ---
 
