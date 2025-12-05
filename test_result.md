@@ -619,6 +619,21 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "Implemented comprehensive Tech Management system in Admin Panel with 4 major sections: 1) API KEYS MANAGEMENT: Full CRUD operations - generate new API keys with custom names, descriptions, optional expiration (days), key prefix format (bsm_xxx), masked key display with show/hide toggle, copy to clipboard, usage tracking (call counts), regenerate keys, delete keys, automatic system logging. 2) WEBHOOKS MANAGEMENT: Full CRUD operations - create webhooks with custom URLs, subscribe to 13+ event types (user.created/updated/deleted, chatbot.created/updated/deleted, conversation.started/completed, message.sent/received, source.uploaded/processed, error.occurred), enable/disable toggle, test webhooks with real HTTP requests, automatic secret generation, success/failure tracking, success rate calculation, activity logs. 3) SYSTEM LOGS: Real-time log viewing with filtering by level (info/warning/error), pagination support (limit/skip), export logs as JSON, auto-logging for all system events (API key creation/deletion, webhook events, errors), includes timestamp, message, details, user, IP address, endpoint, method. 4) ERROR TRACKING: Automatic error tracking with deduplication (same error types grouped), stack trace storage, occurrence counting, endpoint tracking, mark as resolved, delete errors, clear all resolved errors, last occurrence timestamp. Backend: Created comprehensive tech_management.py router with 20+ endpoints covering all CRUD operations, helper functions for API key generation (SHA256 hashing), automatic system logging, error tracking with MongoDB aggregation. Frontend: Completely rebuilt TechManagement.jsx with beautiful UI - stats dashboard showing totals (API keys, webhooks, logs, errors), create modals for API keys and webhooks, masked credential display, real-time refresh, export functionality, comprehensive error handling. All services tested and working correctly."
+  
+  - task: "Manage Subscription Modal - Database Field Fix"
+    implemented: true
+    working: true
+    file: "/app/backend/routers/admin_subscriptions.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "User reported that 'Manage Subscription 💳' button in Admin Panel → Users dropdown is not fully functional"
+      - working: true
+        agent: "main"
+        comment: "✅ FIXED: Database field mismatch causing subscription modal to fail. ROOT CAUSE: admin_subscriptions.py was querying users collection using 'user_id' field but database uses 'id' field for user identification. FIXES APPLIED: 1) Line 41: Changed user query from {'user_id': user_id} to {'id': user_id}, 2) Line 66: Updated return value from user.get('user_id') to user.get('id'), 3) Line 159, 226, 286: Fixed all user document updates to use {'id': user_id} instead of {'user_id': user_id}. All subscription management endpoints now working: GET /{user_id} (view subscription details with plan info, days remaining, lifetime access status), PUT /{user_id}/extend (extend subscription by custom days), POST /{user_id}/renew (quick 30-day renewal), PUT /{user_id}/lifetime (grant/revoke lifetime access), PUT /{user_id}/plan (change subscription plan), GET /plans (list all available plans). Modal displays Overview tab (current plan, status, days remaining, subscription dates, plan features) and Actions tab (extend subscription, quick renew, lifetime access toggle, change plan). Backend restarted successfully to apply fixes."
 
   - task: "Slack Integration - Full Message Handling"
     implemented: true
