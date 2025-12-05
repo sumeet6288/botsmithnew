@@ -124,7 +124,7 @@ api_router.include_router(messenger.router)
 api_router.include_router(tech_management.router, prefix="/tech", tags=["Tech Management"])
 api_router.include_router(payment_settings.router)
 api_router.include_router(admin_settings.router, prefix="/admin/settings", tags=["Admin Settings"])
-api_router.include_router(admin_impersonation.router, tags=["Admin Impersonation"])
+api_router.include_router(admin_direct_login.router, tags=["Admin Direct Login"])
 
 # Include the router in the main app
 app.include_router(api_router)
