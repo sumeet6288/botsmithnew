@@ -22,8 +22,15 @@ const ManageSubscriptionModal = ({ user, onClose, onUpdate }) => {
   const fetchSubscriptionDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/admin/subscriptions/${user.user_id}`);
+      console.log('Fetching subscription for user:', user);
+      console.log('User ID:', user.user_id);
+      console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api/admin/subscriptions/${user.user_id}`;
+      console.log('Full URL:', url);
+      const response = await fetch(url);
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Subscription data received:', data);
       setSubscriptionData(data);
     } catch (error) {
       console.error('Error fetching subscription:', error);
