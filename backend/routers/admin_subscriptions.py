@@ -1,10 +1,8 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime, timedelta
 from motor.motor_asyncio import AsyncIOMotorClient
-from auth import get_current_user
-from models import User
 import os
 
 router = APIRouter(prefix="/admin/subscriptions", tags=["admin-subscriptions"])
@@ -29,10 +27,7 @@ class LifetimeAccessRequest(BaseModel):
     grant_lifetime: bool = Field(description="Grant or revoke lifetime access")
 
 @router.get("/{user_id}")
-async def get_user_subscription_details(
-    user_id: str,
-    current_user: User = Depends(get_current_user)
-):
+async def get_user_subscription_details(user_id: str):
     """
     Get detailed subscription information for a user
     """
@@ -113,8 +108,7 @@ async def get_user_subscription_details(
 @router.put("/{user_id}/extend")
 async def extend_subscription(
     user_id: str,
-    request: ExtendSubscriptionRequest,
-    current_user: User = Depends(get_current_user)
+    request: ExtendSubscriptionRequest
 ):
     """
     Extend user's subscription by specified number of days
@@ -180,18 +174,14 @@ async def extend_subscription(
         raise HTTPException(status_code=500, detail=f"Error extending subscription: {str(e)}")
 
 @router.post("/{user_id}/renew")
-async def renew_user_subscription(
-    user_id: str,
-    current_user: User = Depends(get_current_user)
-):
+async def renew_user_subscription(user_id: str):
     """
     Renew user's subscription for another 30 days
     """
     try:
         return await extend_subscription(
             user_id,
-            ExtendSubscriptionRequest(days=30),
-            current_user
+            ExtendSubscriptionRequest(days=30)
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error renewing subscription: {str(e)}")
@@ -199,8 +189,7 @@ async def renew_user_subscription(
 @router.put("/{user_id}/lifetime")
 async def toggle_lifetime_access(
     user_id: str,
-    request: LifetimeAccessRequest,
-    current_user: User = Depends(get_current_user)
+    request: LifetimeAccessRequest
 ):
     """
     Grant or revoke lifetime access for a user
@@ -259,8 +248,7 @@ async def toggle_lifetime_access(
 @router.put("/{user_id}/plan")
 async def change_user_plan(
     user_id: str,
-    request: ChangePlanRequest,
-    current_user: User = Depends(get_current_user)
+    request: ChangePlanRequest
 ):
     """
     Change user's subscription plan
@@ -321,7 +309,7 @@ async def change_user_plan(
         raise HTTPException(status_code=500, detail=f"Error changing plan: {str(e)}")
 
 @router.get("/plans")
-async def get_all_plans(current_user: User = Depends(get_current_user)):
+async def get_all_plans():
     """
     Get all available plans for admin to choose from
     """
