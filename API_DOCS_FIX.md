@@ -68,9 +68,9 @@ csp = (
 ## Results
 
 ### ✅ API Documentation Now Accessible At:
-- **Swagger UI**: https://simple-token-auth.preview.emergentagent.com/api/docs
-- **ReDoc**: https://simple-token-auth.preview.emergentagent.com/api/redoc
-- **OpenAPI JSON**: https://simple-token-auth.preview.emergentagent.com/api/openapi.json
+- **Swagger UI**: https://user-login-fix-2.preview.emergentagent.com/api/docs
+- **ReDoc**: https://user-login-fix-2.preview.emergentagent.com/api/redoc
+- **OpenAPI JSON**: https://user-login-fix-2.preview.emergentagent.com/api/openapi.json
 
 ### ✅ Features Working:
 - Full Swagger UI interface rendering correctly
