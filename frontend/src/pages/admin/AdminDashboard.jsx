@@ -553,10 +553,6 @@ const AdminDashboard = () => {
             <LifecycleManagement backendUrl={backendUrl} />
           )}
 
-          {activeTab === 'impersonation' && (
-            <ImpersonationPanel backendUrl={backendUrl} />
-          )}
-
           {activeTab === 'revenue' && (
             <RevenueDashboard backendUrl={backendUrl} />
           )}
