@@ -57,12 +57,12 @@ The backend (`/app/backend/routers/admin_direct_login.py`) was already working c
 ### Test Setup:
 - **Admin credentials**: admin@botsmith.com / admin123
 - **Test user**: admsin@botsmith.com (role: user)
-- **Preview URL**: https://rapid-stack-setup.preview.emergentagent.com
+- **Preview URL**: https://db-config-repair-1.preview.emergentagent.com
 
 ### Testing Steps:
 
 1. **Login as Admin**
-   - Go to: https://rapid-stack-setup.preview.emergentagent.com/signin
+   - Go to: https://db-config-repair-1.preview.emergentagent.com/signin
    - Email: admin@botsmith.com
    - Password: admin123
    - Verify you're on the admin account (check profile dropdown)
@@ -136,6 +136,6 @@ All services are running:
 - Frontend: Port 3000 (compiled successfully)
 - Backend: Port 8001 (all APIs working)
 - MongoDB: Port 27017 (2 users, verified)
-- Preview URL: https://rapid-stack-setup.preview.emergentagent.com
+- Preview URL: https://db-config-repair-1.preview.emergentagent.com
 
 The Direct Login / Impersonation feature is now fully functional and ready for production use!
