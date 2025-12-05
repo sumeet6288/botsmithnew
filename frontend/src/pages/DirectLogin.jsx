@@ -40,23 +40,30 @@ const DirectLogin = () => {
       if (response.data.success && response.data.user) {
         const user = response.data.user;
         
-        // Store user data in localStorage (standard authentication)
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', token);
-        localStorage.setItem('isAuthenticated', 'true');
+        // Clear any existing session first
+        localStorage.removeItem('botsmith_token');
+        localStorage.removeItem('botsmith_user');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('isAuthenticated');
+        
+        // Store user data in localStorage using correct keys for AuthContext
+        localStorage.setItem('botsmith_token', token);
+        localStorage.setItem('botsmith_user', JSON.stringify(user));
         
         setUserData(user);
         setStatus('success');
         setMessage(`Successfully logged in as ${user.name || user.email}`);
         
         toast.success(
-          `🔐 Direct Login Successful\nLogged in as: ${user.name || user.email}`,
+          `🔐 Direct Login Successful\nLogged in as: ${user.name || user.email}\nRole: ${user.role || 'user'}`,
           { duration: 4000 }
         );
         
-        // Redirect to dashboard after 2 seconds
+        // Redirect based on user role after 2 seconds
         setTimeout(() => {
-          navigate('/dashboard');
+          // Force page reload to ensure AuthContext picks up new user
+          window.location.href = '/dashboard';
         }, 2000);
       } else {
         throw new Error('Invalid response from server');
