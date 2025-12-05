@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import UltimateEditUserModal from './UltimateEditUserModal';
+import ManageSubscriptionModal from './ManageSubscriptionModal';
 
 const AdvancedUsersManagement = ({ backendUrl }) => {
   // State Management
