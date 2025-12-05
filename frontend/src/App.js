@@ -140,7 +140,6 @@ function AppContent() {
     <div className="App">
       <BrowserRouter>
         <ScrollToTop />
-        <ImpersonationBanner />
         <NotificationProvider user={user}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
