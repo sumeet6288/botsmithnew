@@ -6,7 +6,7 @@ import {
   UserCheck, UserX, PhoneCall, MapPin, Hash, RefreshCw, Archive,
   Star, Award, Target, Zap, Key, Save, X, Copy, FileDown, FileUp,
   Lock, Unlock, AlertTriangle, CheckCircle2, Send, UserCog, MoreVertical,
-  Bell, ShieldAlert, ShieldCheck, Database, TrendingDown, PieChart, LogIn
+  Bell, ShieldAlert, ShieldCheck, Database, TrendingDown, PieChart, LogIn, CreditCard
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import UltimateEditUserModal from './UltimateEditUserModal';
