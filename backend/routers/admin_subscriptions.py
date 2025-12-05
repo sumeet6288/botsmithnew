@@ -37,12 +37,12 @@ async def get_user_subscription_details(
     Get detailed subscription information for a user
     """
     try:
-        # Get user from database
-        user = await users_collection.find_one({"user_id": user_id})
+        # Get user from database (using 'id' field)
+        user = await users_collection.find_one({"id": user_id})
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
         
-        # Get subscription
+        # Get subscription (using 'user_id' field which stores the user's id)
         subscription = await subscriptions_collection.find_one({"user_id": user_id})
         if not subscription:
             # Create default subscription if not exists
@@ -94,7 +94,7 @@ async def get_user_subscription_details(
         
         return {
             "user": {
-                "user_id": user.get("user_id"),
+                "user_id": user.get("id"),  # Use 'id' field from user document
                 "name": user.get("name"),
                 "email": user.get("email"),
                 "created_at": user.get("created_at")
