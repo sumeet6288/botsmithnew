@@ -15,7 +15,6 @@ const AdminSidebar = ({ activeTab, onTabChange, isCollapsed, setIsCollapsed }) =
     { id: 'segmentation', label: 'Segmentation', icon: Target },
     { id: 'email-campaigns', label: 'Email Campaigns', icon: Mail },
     { id: 'lifecycle', label: 'Lifecycle', icon: TrendingUp },
-    { id: 'impersonation', label: 'Impersonation', icon: UserCheck },
     { id: 'revenue', label: 'Revenue', icon: DollarSign },
     { id: 'users', label: 'Users', icon: Users },
     { id: 'chatbots', label: 'Chatbots', icon: Bot },
