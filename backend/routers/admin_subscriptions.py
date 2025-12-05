@@ -157,7 +157,7 @@ async def extend_subscription(
         
         # Also update user document
         await users_collection.update_one(
-            {"user_id": user_id},
+            {"id": user_id},
             {
                 "$set": {
                     "subscription_expires_at": new_expiry,
@@ -224,7 +224,7 @@ async def toggle_lifetime_access(
         
         # Also update user document
         await users_collection.update_one(
-            {"user_id": user_id},
+            {"id": user_id},
             {
                 "$set": {
                     "lifetime_access": request.grant_lifetime,
@@ -284,7 +284,7 @@ async def change_user_plan(
         
         # Also update user document
         await users_collection.update_one(
-            {"user_id": user_id},
+            {"id": user_id},
             {
                 "$set": {
                     "plan_id": request.plan_id,
