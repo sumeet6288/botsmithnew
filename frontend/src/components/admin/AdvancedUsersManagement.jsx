@@ -768,6 +768,17 @@ const AdvancedUsersManagement = ({ backendUrl }) => {
                               <LogIn className="w-4 h-4" />
                               Direct Login 🔐
                             </button>
+                            <button
+                              onClick={() => {
+                                setViewingUser(user);
+                                setShowSubscriptionModal(true);
+                                setOpenDropdownId(null);
+                              }}
+                              className="w-full px-4 py-2 text-left text-sm hover:bg-indigo-50 flex items-center gap-2 text-indigo-700 font-medium"
+                            >
+                              <CreditCard className="w-4 h-4" />
+                              Manage Subscription 💳
+                            </button>
                             <div className="border-t border-gray-200 my-2"></div>
                             <button
                               onClick={() => {
