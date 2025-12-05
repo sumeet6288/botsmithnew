@@ -50,6 +50,7 @@ async def generate_direct_login_token(
         actual_user_id = user.get("user_id") or user.get("id")
         
         token_data = {
+            "sub": user["email"],  # CRITICAL: "sub" field required by auth system
             "user_id": actual_user_id,
             "id": actual_user_id,
             "email": user["email"],
