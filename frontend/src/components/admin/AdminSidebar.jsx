@@ -100,7 +100,7 @@ const AdminSidebar = ({ activeTab, onTabChange, isCollapsed, setIsCollapsed }) =
       </div>
 
       {/* Collapse Toggle Button */}
-      <div className="border-t border-gray-200 p-2">
+      <div className="border-t border-gray-200 p-2 flex-shrink-0">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
