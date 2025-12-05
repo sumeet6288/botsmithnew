@@ -1649,6 +1649,21 @@ const AdvancedUsersManagement = ({ backendUrl }) => {
           }}
         />
       )}
+
+      {/* Manage Subscription Modal */}
+      {showSubscriptionModal && viewingUser && (
+        <ManageSubscriptionModal
+          user={viewingUser}
+          onClose={() => {
+            setShowSubscriptionModal(false);
+            setViewingUser(null);
+          }}
+          onUpdate={() => {
+            fetchUsers();
+            fetchStatistics();
+          }}
+        />
+      )}
     </div>
   );
 };
