@@ -261,12 +261,12 @@ const EnhancedChatbotsManagement = ({ backendUrl }) => {
   };
 
   const transferOwnership = async () => {
-    if (!transferUserId) {
-      alert('Please enter new owner ID');
+    if (!transferUserId || transferUserId.trim() === '') {
+      alert('Please enter a valid new owner User ID');
       return;
     }
     
-    if (!window.confirm(`Transfer ownership of "${selectedChatbot.name}" to user ${transferUserId}?`)) {
+    if (!window.confirm(`⚠️ Transfer ownership of "${selectedChatbot?.name}" to user ${transferUserId}?\n\nThis will give the new owner full control of this chatbot.`)) {
       return;
     }
     
@@ -276,15 +276,28 @@ const EnhancedChatbotsManagement = ({ backendUrl }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ new_owner_id: transferUserId })
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
       if (data.success) {
-        alert('Ownership transferred successfully');
+        alert('✅ Ownership transferred successfully!\n\n' +
+              `Chatbot: ${selectedChatbot.name}\n` +
+              `Previous Owner: ${data.old_owner_id}\n` +
+              `New Owner: ${data.new_owner_id}`);
         setShowTransferModal(false);
+        setTransferUserId('');
         fetchChatbots();
+      } else {
+        throw new Error('Transfer operation failed');
       }
     } catch (error) {
       console.error('Error transferring ownership:', error);
-      alert('Transfer failed');
+      alert(`❌ Transfer failed: ${error.message}`);
     }
   };
 
