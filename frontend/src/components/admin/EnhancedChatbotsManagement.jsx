@@ -257,10 +257,25 @@ const EnhancedChatbotsManagement = ({ backendUrl }) => {
     }
   };
 
+  const fetchAvailableUsers = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/admin/users/enhanced?limit=100`);
+      const data = await response.json();
+      if (data.users) {
+        setAvailableUsers(data.users);
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
   const openTransferModal = (chatbot) => {
     setSelectedChatbot(chatbot);
     setTransferUserId('');
+    setUserSearchTerm('');
+    setShowUserDropdown(false);
     setShowTransferModal(true);
+    fetchAvailableUsers();
   };
 
   const transferOwnership = async () => {
