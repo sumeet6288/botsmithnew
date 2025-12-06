@@ -37,6 +37,9 @@ const EnhancedChatbotsManagement = ({ backendUrl }) => {
   const [chatbotAnalytics, setChatbotAnalytics] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const [transferUserId, setTransferUserId] = useState('');
+  const [availableUsers, setAvailableUsers] = useState([]);
+  const [userSearchTerm, setUserSearchTerm] = useState('');
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   
   useEffect(() => {
     fetchChatbots();
