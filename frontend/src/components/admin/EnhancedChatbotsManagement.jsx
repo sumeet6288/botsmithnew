@@ -70,15 +70,37 @@ const EnhancedChatbotsManagement = ({ backendUrl }) => {
 
   const toggleChatbot = async (chatbotId) => {
     try {
+      // Show loading state
+      const chatbotToUpdate = chatbots.find(bot => bot.id === chatbotId);
+      const action = chatbotToUpdate?.enabled ? 'disable' : 'enable';
+      
+      if (!window.confirm(`Are you sure you want to ${action} this chatbot?`)) {
+        return;
+      }
+      
       const response = await fetch(`${backendUrl}/api/admin/chatbots/${chatbotId}/toggle`, {
         method: 'PUT'
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
       if (data.success) {
+        // Show success message
+        const newState = data.enabled ? 'enabled' : 'disabled';
+        alert(`Chatbot ${newState} successfully!`);
+        
+        // Refresh the list
         fetchChatbots();
+      } else {
+        throw new Error('Toggle operation failed');
       }
     } catch (error) {
       console.error('Error toggling chatbot:', error);
+      alert(`Failed to toggle chatbot: ${error.message}`);
     }
   };
 
