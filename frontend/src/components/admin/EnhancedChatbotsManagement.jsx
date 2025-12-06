@@ -1104,26 +1104,95 @@ const EnhancedChatbotsManagement = ({ backendUrl }) => {
               </button>
             </div>
             <div className="p-6">
-              <div className="mb-4">
-                <p className="text-sm text-gray-600 mb-2">Current Owner: <span className="font-semibold">{selectedChatbot.owner.name}</span></p>
-                <p className="text-sm text-gray-600">Chatbot: <span className="font-semibold">{selectedChatbot.name}</span></p>
+              <div className="mb-4 bg-gradient-to-r from-orange-50 to-red-50 p-4 rounded-lg border border-orange-200">
+                <p className="text-sm text-gray-700 mb-1">
+                  <span className="font-medium">Current Owner:</span> {selectedChatbot?.owner?.name || 'Unknown'} ({selectedChatbot?.owner?.email || 'N/A'})
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Chatbot:</span> {selectedChatbot?.name}
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">New Owner User ID</label>
-                <input
-                  type="text"
-                  value={transferUserId}
-                  onChange={(e) => setTransferUserId(e.target.value)}
-                  placeholder="Enter user ID"
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
-                />
+              
+              <div className="space-y-4">
+                {/* Search and select from existing users */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Search Users
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={userSearchTerm}
+                      onChange={(e) => {
+                        setUserSearchTerm(e.target.value);
+                        setShowUserDropdown(true);
+                      }}
+                      onFocus={() => setShowUserDropdown(true)}
+                      placeholder="Search by name or email..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                    {showUserDropdown && userSearchTerm && (
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-auto">
+                        {availableUsers
+                          .filter(user => 
+                            user.name?.toLowerCase().includes(userSearchTerm.toLowerCase()) ||
+                            user.email?.toLowerCase().includes(userSearchTerm.toLowerCase())
+                          )
+                          .map(user => (
+                            <button
+                              key={user.id}
+                              onClick={() => {
+                                setTransferUserId(user.id);
+                                setUserSearchTerm(`${user.name} (${user.email})`);
+                                setShowUserDropdown(false);
+                              }}
+                              className="w-full px-4 py-2 text-left hover:bg-orange-50 border-b border-gray-100 last:border-b-0"
+                            >
+                              <div className="font-medium text-gray-900">{user.name}</div>
+                              <div className="text-sm text-gray-600">{user.email}</div>
+                              <div className="text-xs text-gray-500">ID: {user.id}</div>
+                            </button>
+                          ))}
+                        {availableUsers.filter(user => 
+                          user.name?.toLowerCase().includes(userSearchTerm.toLowerCase()) ||
+                          user.email?.toLowerCase().includes(userSearchTerm.toLowerCase())
+                        ).length === 0 && (
+                          <div className="px-4 py-3 text-sm text-gray-500">No users found</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Or manually enter User ID */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Or Enter User ID Manually
+                  </label>
+                  <input
+                    type="text"
+                    value={transferUserId}
+                    onChange={(e) => setTransferUserId(e.target.value)}
+                    placeholder="Enter user ID (e.g., admin-001)"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    💡 Tip: Use the search above to find users easily
+                  </p>
+                </div>
               </div>
+
               <div className="mt-6 flex justify-end gap-3">
                 <Button onClick={() => setShowTransferModal(false)} variant="outline">
                   Cancel
                 </Button>
-                <Button onClick={transferOwnership} className="bg-orange-600 hover:bg-orange-700">
-                  Transfer
+                <Button 
+                  onClick={transferOwnership} 
+                  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white"
+                  disabled={!transferUserId || transferUserId.trim() === ''}
+                >
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Transfer Ownership
                 </Button>
               </div>
             </div>
