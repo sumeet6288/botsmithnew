@@ -19,14 +19,30 @@ from middleware.security import (
     APIKeyProtectionMiddleware
 )
 
+# Import performance middleware for high scalability
+from middleware.performance import (
+    RequestTimeoutMiddleware,
+    PerformanceMonitoringMiddleware,
+    ConnectionPoolMiddleware
+)
+
+# Import scalability configuration
+from config.scalability import ScalabilityConfig, initialize_pool_monitor
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
+# MongoDB connection with optimized connection pooling for 1000+ concurrent users
 mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
+client = ScalabilityConfig.get_optimized_mongo_client(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# Initialize connection pool monitoring
+initialize_pool_monitor(client)
+
+# Log scalability configuration
+ScalabilityConfig.log_configuration()
 
 # Initialize auth module with database
 auth.init_auth(db)
