@@ -219,10 +219,17 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def startup_event():
-    """Initialize plans and Discord bots on startup"""
+    """Initialize plans, database indexes, and Discord bots on startup"""
     logger.info("Initializing plans...")
     await plan_service.initialize_plans()
     logger.info("Plans initialized successfully")
+    
+    # Create database indexes for optimal performance
+    try:
+        from utils.database_indexes import create_performance_indexes
+        await create_performance_indexes(db)
+    except Exception as e:
+        logger.warning(f"Note: Some indexes may already exist: {e}")
     
     # Create default admin user if no users exist
     try:
