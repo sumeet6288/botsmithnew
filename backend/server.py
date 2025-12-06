@@ -146,7 +146,7 @@ api_router.include_router(admin_subscriptions.router, tags=["Admin Subscriptions
 # Include the router in the main app
 app.include_router(api_router)
 
-# Add security middleware (order matters - last added runs first)
+# Add middleware (order matters - last added runs first)
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -156,11 +156,24 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Performance monitoring middleware - tracks slow requests
+app.add_middleware(PerformanceMonitoringMiddleware, slow_request_threshold=5.0)
+
+# Request timeout middleware - prevents hanging requests (30s timeout)
+app.add_middleware(RequestTimeoutMiddleware, timeout=ScalabilityConfig.REQUEST_TIMEOUT)
+
+# Connection pool middleware for efficient DB connection management
+app.add_middleware(ConnectionPoolMiddleware)
+
 # Security headers middleware
 app.add_middleware(SecurityHeadersMiddleware)
 
-# Rate limiting middleware (200 requests/min, 5000 requests/hour)
-app.add_middleware(RateLimitMiddleware, requests_per_minute=200, requests_per_hour=5000)
+# Rate limiting middleware - configurable from ScalabilityConfig
+app.add_middleware(
+    RateLimitMiddleware, 
+    requests_per_minute=ScalabilityConfig.RATE_LIMIT_PER_MINUTE,
+    requests_per_hour=ScalabilityConfig.RATE_LIMIT_PER_HOUR
+)
 
 # Input validation middleware
 app.add_middleware(InputValidationMiddleware)
