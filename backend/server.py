@@ -110,6 +110,35 @@ api_router = APIRouter(prefix="/api")
 async def root():
     return {"message": "BotSmith API", "status": "running"}
 
+# Enhanced health check with connection pool status
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint with database and connection pool status"""
+    from config.scalability import get_pool_health
+    
+    try:
+        # Check database connectivity
+        await db.command('ping')
+        db_status = "healthy"
+    except Exception as e:
+        logger.error(f"Database health check failed: {e}")
+        db_status = "unhealthy"
+    
+    # Get connection pool health
+    pool_health = await get_pool_health()
+    
+    return {
+        "status": "running",
+        "database": db_status,
+        "connection_pool": pool_health,
+        "scalability": {
+            "max_pool_size": ScalabilityConfig.MONGO_MAX_POOL_SIZE,
+            "min_pool_size": ScalabilityConfig.MONGO_MIN_POOL_SIZE,
+            "concurrent_tasks_limit": ScalabilityConfig.ASYNC_CONCURRENCY_LIMIT,
+            "rate_limit_per_minute": ScalabilityConfig.RATE_LIMIT_PER_MINUTE
+        }
+    }
+
 # Include all routers
 api_router.include_router(auth_router.router)
 api_router.include_router(user_router.router)
