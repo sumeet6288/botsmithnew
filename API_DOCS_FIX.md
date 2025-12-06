@@ -68,9 +68,9 @@ csp = (
 ## Results
 
 ### ✅ API Documentation Now Accessible At:
-- **Swagger UI**: https://full-stack-setup-11.preview.emergentagent.com/api/docs
-- **ReDoc**: https://full-stack-setup-11.preview.emergentagent.com/api/redoc
-- **OpenAPI JSON**: https://full-stack-setup-11.preview.emergentagent.com/api/openapi.json
+- **Swagger UI**: https://db-connect-preview-1.preview.emergentagent.com/api/docs
+- **ReDoc**: https://db-connect-preview-1.preview.emergentagent.com/api/redoc
+- **OpenAPI JSON**: https://db-connect-preview-1.preview.emergentagent.com/api/openapi.json
 
 ### ✅ Features Working:
 - Full Swagger UI interface rendering correctly
