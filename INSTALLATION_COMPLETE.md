@@ -143,14 +143,14 @@ Created: December 5, 2025
 ## 🌐 Access URLs
 
 ### 🎯 Main Application
-**Frontend:** https://db-config-repair-1.preview.emergentagent.com  
+**Frontend:** https://full-stack-setup-11.preview.emergentagent.com  
 - Full React application with beautiful UI
 - Responsive design with Tailwind CSS
 - Dark mode support
 
 ### 🔧 Backend API
-**API Base:** https://db-config-repair-1.preview.emergentagent.com/api  
-**API Documentation:** https://db-config-repair-1.preview.emergentagent.com/api/docs  
+**API Base:** https://full-stack-setup-11.preview.emergentagent.com/api  
+**API Documentation:** https://full-stack-setup-11.preview.emergentagent.com/api/docs  
 - Interactive Swagger/OpenAPI documentation
 - All REST endpoints accessible
 
@@ -252,7 +252,7 @@ JWT_ALGORITHM=HS256
 
 ### Frontend (.env)
 ```bash
-REACT_APP_BACKEND_URL=https://db-config-repair-1.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://full-stack-setup-11.preview.emergentagent.com
 ```
 
 ---
@@ -312,7 +312,7 @@ yarn start
 ## 🧪 Testing
 
 ### Manual Testing Steps:
-1. ✅ **Access Frontend:** https://db-config-repair-1.preview.emergentagent.com
+1. ✅ **Access Frontend:** https://full-stack-setup-11.preview.emergentagent.com
 2. ✅ **Login:** Use admin@botsmith.com / admin123
 3. ✅ **Create Chatbot:** Navigate to Dashboard → Create New Chatbot
 4. ✅ **Add Knowledge Source:** Upload file, add website, or input text
@@ -323,13 +323,13 @@ yarn start
 ### API Testing:
 ```bash
 # Health check (if available)
-curl https://db-config-repair-1.preview.emergentagent.com/api/health
+curl https://full-stack-setup-11.preview.emergentagent.com/api/health
 
 # Get plans
-curl https://db-config-repair-1.preview.emergentagent.com/api/plans
+curl https://full-stack-setup-11.preview.emergentagent.com/api/plans
 
 # API Documentation
-# Visit: https://db-config-repair-1.preview.emergentagent.com/api/docs
+# Visit: https://full-stack-setup-11.preview.emergentagent.com/api/docs
 ```
 
 ---
@@ -347,7 +347,7 @@ curl https://db-config-repair-1.preview.emergentagent.com/api/plans
 ## 🎯 Next Steps
 
 1. **Test the Application:**
-   - Access https://db-config-repair-1.preview.emergentagent.com
+   - Access https://full-stack-setup-11.preview.emergentagent.com
    - Login with admin credentials
    - Explore all features
 
@@ -397,7 +397,7 @@ curl https://db-config-repair-1.preview.emergentagent.com/api/plans
 
 Your BotSmith AI Chatbot Builder is now **fully operational** and ready to use!
 
-**Application URL:** https://db-config-repair-1.preview.emergentagent.com  
+**Application URL:** https://full-stack-setup-11.preview.emergentagent.com  
 **Login:** admin@botsmith.com / admin123
 
 All dependencies are installed, all services are running, and the database is properly configured with initial data.
