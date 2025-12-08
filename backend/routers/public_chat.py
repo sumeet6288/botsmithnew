@@ -85,6 +85,13 @@ async def public_chat(chatbot_id: str, request: PublicChatRequest):
     if not chatbot.get("public_access", False):
         raise HTTPException(status_code=403, detail="This chatbot is not publicly accessible")
     
+    # ✅ CHECK IF CHATBOT IS ACTIVE
+    if chatbot.get("status") != "active":
+        raise HTTPException(
+            status_code=400,
+            detail="This chatbot is currently inactive. Please contact the chatbot owner."
+        )
+    
     # ✅ CHECK MESSAGE LIMIT BEFORE PROCESSING
     user_id = chatbot.get("user_id")
     if user_id:
