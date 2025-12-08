@@ -184,6 +184,18 @@ async def process_whatsapp_message(chatbot_id: str, message: Dict[str, Any], val
         
         whatsapp_service = WhatsAppService(access_token, phone_number_id)
         
+        # ✅ CHECK IF CHATBOT IS ACTIVE
+        if chatbot.get("status") != "active":
+            inactive_message = (
+                f"⚠️ *Chatbot Inactive*\n\n"
+                f"This chatbot is currently inactive and cannot process messages.\n"
+                f"Please contact the chatbot owner to activate it.\n\n"
+                f"Dashboard: {os.environ.get('FRONTEND_URL', 'https://widget-response-fix.preview.emergentagent.com')}"
+            )
+            await whatsapp_service.send_message(from_number, inactive_message)
+            logger.info(f"Chatbot {chatbot_id} is inactive. Skipping message processing.")
+            return
+        
         # ✅ CHECK MESSAGE LIMIT BEFORE PROCESSING
         owner_user_id = chatbot.get('user_id')
         if owner_user_id:
