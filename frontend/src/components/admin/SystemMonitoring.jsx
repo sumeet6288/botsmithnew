@@ -47,7 +47,7 @@ const SystemMonitoring = ({ backendUrl }) => {
     }
   };
 
-  const getStatusColor = (value, thresholds = { good: 50, warning: 75 }) => {
+  const getStatusColor = (value, thresholds = { good: 60, warning: 80 }) => {
     if (value < thresholds.good) return 'bg-green-500';
     if (value < thresholds.warning) return 'bg-yellow-500';
     return 'bg-red-500';
