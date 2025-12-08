@@ -443,7 +443,15 @@ async def bulk_operations(request: BulkOperationRequest) -> Dict[str, Any]:
             
         elif request.operation == 'delete':
             # Delete chatbots and all related data
+            chunks_collection = db_instance['chunks']
+            from services.cache_service import cache_service
+            from services.plan_service import plan_service
+            
             for chatbot_id in request.ids:
+                # Get chatbot to find user_id
+                chatbot = await chatbots_collection.find_one({'id': chatbot_id})
+                user_id = chatbot.get('user_id') if chatbot else None
+                
                 # Delete sources
                 await sources_collection.delete_many({'chatbot_id': chatbot_id})
                 # Delete messages
@@ -452,8 +460,23 @@ async def bulk_operations(request: BulkOperationRequest) -> Dict[str, Any]:
                 await conversations_collection.delete_many({'chatbot_id': chatbot_id})
                 # Delete integrations
                 await integrations_collection.delete_many({'chatbot_id': chatbot_id})
+                # Delete chunks
+                await chunks_collection.delete_many({'chatbot_id': chatbot_id})
+                
+                # Invalidate cache
+                cache_service.delete(f"chatbot:{chatbot_id}")
+                cache_service.delete(f"public_chatbot:{chatbot_id}")
+                
                 # Delete chatbot
                 await chatbots_collection.delete_one({'id': chatbot_id})
+                
+                # Decrement user's chatbot usage count
+                if user_id:
+                    try:
+                        await plan_service.decrement_usage(user_id, "chatbots")
+                    except Exception as e:
+                        logger.warning(f"Failed to decrement usage count for user {user_id}: {e}")
+                
                 affected_count += 1
         
         else:
