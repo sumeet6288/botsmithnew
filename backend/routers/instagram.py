@@ -69,6 +69,18 @@ async def process_instagram_message(
         
         instagram_service = get_instagram_service(page_access_token)
         
+        # ✅ CHECK IF CHATBOT IS ACTIVE
+        if chatbot.get("status") != "active":
+            inactive_message = (
+                f"⚠️ Chatbot Inactive\n\n"
+                f"This chatbot is currently inactive and cannot process messages.\n"
+                f"Please contact the chatbot owner to activate it.\n\n"
+                f"Dashboard: {os.environ.get('FRONTEND_URL', 'https://widget-response-fix.preview.emergentagent.com')}"
+            )
+            await instagram_service.send_message(sender_id, inactive_message)
+            logger.info(f"Chatbot {chatbot_id} is inactive. Skipping message processing.")
+            return
+        
         # ✅ CHECK MESSAGE LIMIT BEFORE PROCESSING
         owner_user_id = chatbot.get('user_id')
         if owner_user_id:
