@@ -123,7 +123,7 @@ Your BotSmith AI application is now **fully installed, configured, and optimized
 
 ### Health Check Endpoint
 ```bash
-curl https://quickapp-deploy.preview.emergentagent.com/api/health
+curl https://mern-rapid-deploy.preview.emergentagent.com/api/health
 ```
 
 **Response**:
@@ -148,13 +148,13 @@ curl https://quickapp-deploy.preview.emergentagent.com/api/health
 ## 🌐 Application Access
 
 ### Frontend
-**URL**: https://quickapp-deploy.preview.emergentagent.com  
+**URL**: https://mern-rapid-deploy.preview.emergentagent.com  
 **Status**: ✅ Compiled and Running  
 **Build**: Development (hot reload enabled)
 
 ### Backend API
-**Base URL**: https://quickapp-deploy.preview.emergentagent.com/api  
-**API Docs**: https://quickapp-deploy.preview.emergentagent.com/api/docs  
+**Base URL**: https://mern-rapid-deploy.preview.emergentagent.com/api  
+**API Docs**: https://mern-rapid-deploy.preview.emergentagent.com/api/docs  
 **Status**: ✅ Running with optimized configuration
 
 ### Database
@@ -269,7 +269,7 @@ Your application is now **production-ready** and optimized to:
 - ✅ Maintain high availability (99.9%+)
 
 **Next Steps**:
-1. Access your application at: https://quickapp-deploy.preview.emergentagent.com
+1. Access your application at: https://mern-rapid-deploy.preview.emergentagent.com
 2. Login with admin credentials
 3. Test features and performance
 4. Review `/app/SCALABILITY_GUIDE.md` for advanced topics
