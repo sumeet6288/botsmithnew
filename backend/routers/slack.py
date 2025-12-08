@@ -58,6 +58,11 @@ async def process_slack_message(
             logger.error(f"Chatbot not found: {chatbot_id}")
             return
         
+        # ✅ CHECK IF CHATBOT IS ACTIVE
+        if chatbot.get("status") != "active":
+            logger.warning(f"Chatbot {chatbot_id} is not active (status: {chatbot.get('status')}). Ignoring message.")
+            return
+        
         # Get Slack integration
         integration = await get_integration_by_chatbot(chatbot_id)
         if not integration:
