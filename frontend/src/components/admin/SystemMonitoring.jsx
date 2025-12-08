@@ -94,10 +94,13 @@ const SystemMonitoring = ({ backendUrl }) => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className={`h-3 rounded-full transition-all ${getStatusColor(health.system?.cpu_usage)}`}
+                  className={`h-3 rounded-full transition-all ${getStatusColor(health.system?.cpu_usage, { good: 60, warning: 85 })}`}
                   style={{ width: `${Math.min(health.system?.cpu_usage || 0, 100)}%` }}
                 ></div>
               </div>
+              <p className="text-xs text-gray-500 mt-1">
+                {health.system?.cpu_usage < 60 ? '✓ Normal' : health.system?.cpu_usage < 85 ? '⚠ Elevated' : '⚠ High'}
+              </p>
             </div>
 
             {/* Memory Usage */}
@@ -108,12 +111,12 @@ const SystemMonitoring = ({ backendUrl }) => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className={`h-3 rounded-full transition-all ${getStatusColor(health.system?.memory_usage)}`}
+                  className={`h-3 rounded-full transition-all ${getStatusColor(health.system?.memory_usage, { good: 70, warning: 90 })}`}
                   style={{ width: `${Math.min(health.system?.memory_usage || 0, 100)}%` }}
                 ></div>
               </div>
               <p className="text-xs text-gray-500 mt-1">
-                {health.system?.memory_available_mb?.toFixed(0)} MB available
+                {(health.system?.memory_available_mb / 1024)?.toFixed(1)} GB available
               </p>
             </div>
 
@@ -125,7 +128,7 @@ const SystemMonitoring = ({ backendUrl }) => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className={`h-3 rounded-full transition-all ${getStatusColor(health.system?.disk_usage)}`}
+                  className={`h-3 rounded-full transition-all ${getStatusColor(health.system?.disk_usage, { good: 70, warning: 85 })}`}
                   style={{ width: `${Math.min(health.system?.disk_usage || 0, 100)}%` }}
                 ></div>
               </div>
