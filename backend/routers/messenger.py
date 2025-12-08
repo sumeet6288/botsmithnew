@@ -172,6 +172,17 @@ async def process_messenger_message(chatbot_id: str, messaging_event: Dict[str, 
         
         messenger_service = MessengerService(page_access_token)
         
+        # ✅ CHECK IF CHATBOT IS ACTIVE
+        if chatbot.get("status") != "active":
+            inactive_message = (
+                "⚠️ Chatbot Inactive\n\n"
+                "This chatbot is currently inactive and cannot process messages.\n"
+                "Please contact the chatbot owner to activate it."
+            )
+            await messenger_service.send_message(sender_id, inactive_message)
+            logger.info(f"Chatbot {chatbot_id} is inactive. Skipping message processing.")
+            return
+        
         # ✅ CHECK MESSAGE LIMIT BEFORE PROCESSING
         owner_user_id = chatbot.get('user_id')
         if owner_user_id:
