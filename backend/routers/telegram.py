@@ -69,6 +69,21 @@ async def process_telegram_message(
         
         telegram_service = get_telegram_service(bot_token)
         
+        # ✅ CHECK IF CHATBOT IS ACTIVE
+        if chatbot.get("status") != "active":
+            inactive_message = (
+                f"⚠️ Chatbot Inactive\n\n"
+                f"This chatbot is currently inactive and cannot process messages.\n"
+                f"Please contact the chatbot owner to activate it.\n\n"
+                f"Visit: {os.environ.get('FRONTEND_URL', 'https://widget-response-fix.preview.emergentagent.com')}"
+            )
+            await telegram_service.send_message(
+                chat_id=chat_id,
+                text=inactive_message
+            )
+            logger.info(f"Chatbot {chatbot_id} is inactive. Skipping message processing.")
+            return
+        
         # ✅ CHECK MESSAGE LIMIT BEFORE PROCESSING
         user_id = chatbot.get('user_id')
         if user_id:
