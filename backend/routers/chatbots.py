@@ -226,6 +226,11 @@ async def toggle_chatbot(
             {"$set": {"status": new_status, "updated_at": datetime.now(timezone.utc)}}
         )
         
+        # IMPORTANT: Invalidate cache so chat endpoint gets fresh status
+        cache_key = f"chatbot:{chatbot_id}"
+        cache_service.delete(cache_key)
+        logger.info(f"Cache invalidated for chatbot {chatbot_id} after status toggle to {new_status}")
+        
         # Fetch updated chatbot
         updated_chatbot = await db_instance.chatbots.find_one({"id": chatbot_id})
         return ChatbotResponse(**updated_chatbot)
