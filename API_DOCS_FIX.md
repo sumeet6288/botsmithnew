@@ -68,9 +68,9 @@ csp = (
 ## Results
 
 ### ✅ API Documentation Now Accessible At:
-- **Swagger UI**: https://inactive-bug-solver.preview.emergentagent.com/api/docs
-- **ReDoc**: https://inactive-bug-solver.preview.emergentagent.com/api/redoc
-- **OpenAPI JSON**: https://inactive-bug-solver.preview.emergentagent.com/api/openapi.json
+- **Swagger UI**: https://widget-response-fix.preview.emergentagent.com/api/docs
+- **ReDoc**: https://widget-response-fix.preview.emergentagent.com/api/redoc
+- **OpenAPI JSON**: https://widget-response-fix.preview.emergentagent.com/api/openapi.json
 
 ### ✅ Features Working:
 - Full Swagger UI interface rendering correctly
