@@ -487,20 +487,39 @@ async def delete_chatbot(chatbot_id: str) -> Dict[str, Any]:
         conversations_collection = db_instance['conversations']
         messages_collection = db_instance['messages']
         integrations_collection = db_instance['integrations']
+        chunks_collection = db_instance['chunks']
         
         # Check if chatbot exists
         chatbot = await chatbots_collection.find_one({'id': chatbot_id})
         if not chatbot:
             raise HTTPException(status_code=404, detail="Chatbot not found")
         
+        user_id = chatbot.get('user_id')
+        
         # Delete all related data
         await sources_collection.delete_many({'chatbot_id': chatbot_id})
         await messages_collection.delete_many({'chatbot_id': chatbot_id})
         await conversations_collection.delete_many({'chatbot_id': chatbot_id})
         await integrations_collection.delete_many({'chatbot_id': chatbot_id})
+        await chunks_collection.delete_many({'chatbot_id': chatbot_id})
         
         # Delete chatbot
         await chatbots_collection.delete_one({'id': chatbot_id})
+        
+        # Invalidate cache for this chatbot
+        from services.cache_service import cache_service
+        cache_service.delete(f"chatbot:{chatbot_id}")
+        cache_service.delete(f"public_chatbot:{chatbot_id}")
+        logger.info(f"Cache invalidated for deleted chatbot {chatbot_id}")
+        
+        # Decrement user's chatbot usage count
+        if user_id:
+            from services.plan_service import plan_service
+            try:
+                await plan_service.decrement_usage(user_id, "chatbots")
+                logger.info(f"Decremented chatbot usage count for user {user_id}")
+            except Exception as e:
+                logger.warning(f"Failed to decrement usage count for user {user_id}: {e}")
         
         return {
             'success': True,
