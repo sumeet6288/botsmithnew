@@ -79,6 +79,22 @@ async def process_discord_message(
             logger.error(f"Chatbot not found: {chatbot_id}")
             return
         
+        # ✅ CHECK IF CHATBOT IS ACTIVE
+        if chatbot.get("status") != "active":
+            inactive_message = (
+                f"⚠️ **Chatbot Inactive**\n\n"
+                f"This chatbot is currently inactive and cannot process messages.\n"
+                f"Please contact the chatbot owner to activate it.\n\n"
+                f"Dashboard: {os.environ.get('FRONTEND_URL', 'https://widget-response-fix.preview.emergentagent.com')}"
+            )
+            await discord_service.send_message(
+                channel_id=channel_id,
+                content=inactive_message,
+                message_reference={"message_id": message_id}
+            )
+            logger.info(f"Chatbot {chatbot_id} is inactive. Skipping message processing.")
+            return
+        
         # ✅ CHECK MESSAGE LIMIT BEFORE PROCESSING
         owner_user_id = chatbot.get('user_id')
         if owner_user_id:
