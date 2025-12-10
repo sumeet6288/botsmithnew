@@ -218,7 +218,7 @@ logger.info(f"Cache invalidated for chatbot {chatbot_id} after status toggle to 
 - ✅ Backend restarted (PID 36)
 - ✅ Frontend compiled (PID 37)
 - ✅ MongoDB running (PID 38)
-- ✅ Application accessible at: https://mern-rapid-deploy.preview.emergentagent.com
+- ✅ Application accessible at: https://rapid-mern-deploy.preview.emergentagent.com
 - ✅ Health check passing
 - ✅ Dependencies installed (Frontend: yarn, Backend: pip)
 
