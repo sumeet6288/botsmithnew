@@ -137,6 +137,17 @@ const ChatbotIntegrations = ({ chatbot }) => {
         { name: 'verify_token', label: 'Verify Token', type: 'text', required: false },
         { name: 'app_secret', label: 'App Secret', type: 'password', required: false }
       ]
+    },
+    {
+      id: 'zapier',
+      name: 'Zapier',
+      description: 'Connect your chatbot to Zapier for workflow automation',
+      icon: <Zap className="w-6 h-6" />,
+      gradient: 'from-orange-400 to-orange-600',
+      fields: [
+        { name: 'webhook_url', label: 'Webhook URL (from Zapier)', type: 'text', required: true },
+        { name: 'api_key', label: 'API Key (optional)', type: 'password', required: false }
+      ]
     }
   ];
 
