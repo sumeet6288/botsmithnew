@@ -607,6 +607,7 @@ class ChatbotResponse(BaseModel):
     widget_theme: str = "auto"
     widget_size: str = "medium"
     auto_expand: bool = False
+    powered_by_text: Optional[str] = None  # Custom "Powered by" text for white label
 
 
 # Source Models
