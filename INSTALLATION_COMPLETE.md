@@ -143,14 +143,14 @@ Created: December 5, 2025
 ## 🌐 Access URLs
 
 ### 🎯 Main Application
-**Frontend:** https://appearance-persist.preview.emergentagent.com  
+**Frontend:** https://fullstack-setup-22.preview.emergentagent.com  
 - Full React application with beautiful UI
 - Responsive design with Tailwind CSS
 - Dark mode support
 
 ### 🔧 Backend API
-**API Base:** https://appearance-persist.preview.emergentagent.com/api  
-**API Documentation:** https://appearance-persist.preview.emergentagent.com/api/docs  
+**API Base:** https://fullstack-setup-22.preview.emergentagent.com/api  
+**API Documentation:** https://fullstack-setup-22.preview.emergentagent.com/api/docs  
 - Interactive Swagger/OpenAPI documentation
 - All REST endpoints accessible
 
@@ -252,7 +252,7 @@ JWT_ALGORITHM=HS256
 
 ### Frontend (.env)
 ```bash
-REACT_APP_BACKEND_URL=https://appearance-persist.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://fullstack-setup-22.preview.emergentagent.com
 ```
 
 ---
@@ -312,7 +312,7 @@ yarn start
 ## 🧪 Testing
 
 ### Manual Testing Steps:
-1. ✅ **Access Frontend:** https://appearance-persist.preview.emergentagent.com
+1. ✅ **Access Frontend:** https://fullstack-setup-22.preview.emergentagent.com
 2. ✅ **Login:** Use admin@botsmith.com / admin123
 3. ✅ **Create Chatbot:** Navigate to Dashboard → Create New Chatbot
 4. ✅ **Add Knowledge Source:** Upload file, add website, or input text
@@ -323,13 +323,13 @@ yarn start
 ### API Testing:
 ```bash
 # Health check (if available)
-curl https://appearance-persist.preview.emergentagent.com/api/health
+curl https://fullstack-setup-22.preview.emergentagent.com/api/health
 
 # Get plans
-curl https://appearance-persist.preview.emergentagent.com/api/plans
+curl https://fullstack-setup-22.preview.emergentagent.com/api/plans
 
 # API Documentation
-# Visit: https://appearance-persist.preview.emergentagent.com/api/docs
+# Visit: https://fullstack-setup-22.preview.emergentagent.com/api/docs
 ```
 
 ---
@@ -347,7 +347,7 @@ curl https://appearance-persist.preview.emergentagent.com/api/plans
 ## 🎯 Next Steps
 
 1. **Test the Application:**
-   - Access https://appearance-persist.preview.emergentagent.com
+   - Access https://fullstack-setup-22.preview.emergentagent.com
    - Login with admin credentials
    - Explore all features
 
@@ -397,7 +397,7 @@ curl https://appearance-persist.preview.emergentagent.com/api/plans
 
 Your BotSmith AI Chatbot Builder is now **fully operational** and ready to use!
 
-**Application URL:** https://appearance-persist.preview.emergentagent.com  
+**Application URL:** https://fullstack-setup-22.preview.emergentagent.com  
 **Login:** admin@botsmith.com / admin123
 
 All dependencies are installed, all services are running, and the database is properly configured with initial data.
