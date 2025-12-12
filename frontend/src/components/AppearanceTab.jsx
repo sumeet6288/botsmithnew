@@ -28,6 +28,27 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
   const logoInputRef = useRef(null);
   const avatarInputRef = useRef(null);
 
+  // Sync customization state when chatbot prop changes
+  useEffect(() => {
+    if (chatbot) {
+      setCustomization({
+        primary_color: chatbot?.primary_color || '#7c3aed',
+        secondary_color: chatbot?.secondary_color || '#a78bfa',
+        accent_color: chatbot?.accent_color || '#ec4899',
+        logo_url: chatbot?.logo_url || '',
+        avatar_url: chatbot?.avatar_url || '',
+        widget_position: chatbot?.widget_position || 'bottom-right',
+        widget_theme: chatbot?.widget_theme || 'light',
+        font_family: chatbot?.font_family || 'Inter, system-ui, sans-serif',
+        font_size: chatbot?.font_size || 'medium',
+        bubble_style: chatbot?.bubble_style || 'rounded',
+        widget_size: chatbot?.widget_size || 'medium',
+        auto_expand: chatbot?.auto_expand || false,
+        powered_by_text: chatbot?.powered_by_text || '',
+      });
+    }
+  }, [chatbot]);
+
   // Fetch user's plan to check if they have custom branding
   useEffect(() => {
     const fetchUserPlan = async () => {
