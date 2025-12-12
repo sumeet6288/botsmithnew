@@ -68,9 +68,9 @@ csp = (
 ## Results
 
 ### ✅ API Documentation Now Accessible At:
-- **Swagger UI**: https://rapid-mern-deploy.preview.emergentagent.com/api/docs
-- **ReDoc**: https://rapid-mern-deploy.preview.emergentagent.com/api/redoc
-- **OpenAPI JSON**: https://rapid-mern-deploy.preview.emergentagent.com/api/openapi.json
+- **Swagger UI**: https://whitelabel-widget.preview.emergentagent.com/api/docs
+- **ReDoc**: https://whitelabel-widget.preview.emergentagent.com/api/redoc
+- **OpenAPI JSON**: https://whitelabel-widget.preview.emergentagent.com/api/openapi.json
 
 ### ✅ Features Working:
 - Full Swagger UI interface rendering correctly
