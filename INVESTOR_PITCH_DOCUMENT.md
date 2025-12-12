@@ -1554,7 +1554,7 @@ Tools & Infrastructure:          10% ($30K)
 
 📧 Email: founders@botsmith.ai  
 📱 Phone: [Investor Relations Number]  
-🌐 Platform Demo: https://plan-upgrade-bug.preview.emergentagent.com  
+🌐 Platform Demo: https://deploy-mongo-app.preview.emergentagent.com  
 📊 Investor Deck: [Link to full slide deck]  
 📈 Financial Model: [Link to detailed Excel model]
 
