@@ -33,22 +33,31 @@ class WhiteLabelTester:
         if self.session:
             await self.session.close()
             
-    async def mock_auth_login(self, email: str, password: str = "test123"):
-        """Mock authentication - get user token"""
+    async def login_user(self, email: str, password: str = "test123"):
+        """Login user and get token"""
         try:
-            # Use mock auth endpoint
-            async with self.session.get(f"{API_BASE}/auth/me/mock") as response:
+            login_data = {
+                "email": email,
+                "password": password
+            }
+            
+            async with self.session.post(
+                f"{API_BASE}/auth/login",
+                json=login_data,
+                headers={"Content-Type": "application/json"}
+            ) as response:
                 if response.status == 200:
-                    user_data = await response.json()
-                    # Create a mock token for this user
-                    token = f"mock-token-{user_data.get('id', 'unknown')}"
-                    return token, user_data
+                    token_data = await response.json()
+                    token = token_data.get("access_token")
+                    print(f"✅ Logged in user: {email}")
+                    return token
                 else:
-                    print(f"❌ Mock auth failed: {response.status}")
-                    return None, None
+                    error_text = await response.text()
+                    print(f"❌ Login failed for {email}: {response.status} - {error_text}")
+                    return None
         except Exception as e:
-            print(f"❌ Mock auth error: {e}")
-            return None, None
+            print(f"❌ Login error for {email}: {e}")
+            return None
             
     async def create_test_user(self, email: str, name: str, plan_id: str = "free"):
         """Create a test user via admin API"""
