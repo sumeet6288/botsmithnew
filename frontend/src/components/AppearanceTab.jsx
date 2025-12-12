@@ -546,6 +546,79 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
         </div>
       </div>
 
+      {/* White Label Branding - Custom "Powered by" */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <Sparkles className="w-5 h-5 text-purple-600" />
+            <h3 className="text-lg font-semibold">White Label Branding</h3>
+            {(!userPlan?.limits?.custom_branding && !loadingPlan) && (
+              <span className="ml-2 px-2 py-1 text-xs font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full">
+                PRO
+              </span>
+            )}
+          </div>
+        </div>
+
+        {loadingPlan ? (
+          <div className="flex items-center justify-center py-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+          </div>
+        ) : userPlan?.limits?.custom_branding ? (
+          <div className="space-y-4">
+            <div className="p-3 bg-purple-50 border border-purple-200 rounded-lg">
+              <p className="text-xs text-purple-800">
+                ✨ Customize the "Powered by" text that appears at the bottom of your chatbot widget. Leave empty to hide it completely.
+              </p>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Custom "Powered by" Text
+              </label>
+              <input
+                type="text"
+                value={customization.powered_by_text || ''}
+                onChange={(e) => handleChange('powered_by_text', e.target.value)}
+                placeholder="e.g., Your Brand Name (leave empty to hide)"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                maxLength={50}
+              />
+              <p className="mt-1 text-xs text-gray-500">
+                {customization.powered_by_text 
+                  ? `Preview: "Powered by ${customization.powered_by_text}"` 
+                  : 'Branding will be hidden when empty'}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg">
+            <div className="flex items-start space-x-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                  <Lock className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                  Upgrade to Customize Your Branding
+                </h4>
+                <p className="text-sm text-gray-700 mb-4">
+                  White label branding is available on <strong>Starter, Professional, and Enterprise</strong> plans. 
+                  Customize or remove the "Powered by" text to match your brand identity.
+                </p>
+                <button
+                  onClick={() => window.location.href = '/subscription'}
+                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-md font-semibold text-sm"
+                >
+                  Upgrade Now
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Widget Settings */}
       <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center space-x-2 mb-4">
