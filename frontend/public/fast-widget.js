@@ -425,6 +425,9 @@
         }, 1000); // Open after 1 second
       }
       
+      // Update branding footer with custom powered_by_text
+      updateBrandingFooter();
+      
       // Add welcome message
       if (chatbot.welcome_message) {
         addMessage('assistant', chatbot.welcome_message);
