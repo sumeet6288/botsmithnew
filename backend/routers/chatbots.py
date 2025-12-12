@@ -172,7 +172,8 @@ async def update_chatbot(
         # Validate white label branding feature (powered_by_text) - only for paid plans
         if "powered_by_text" in update_data and update_data["powered_by_text"] is not None:
             # Check if user's plan has custom_branding enabled
-            user_plan = await plan_service.get_user_plan(current_user.id)
+            usage_stats = await plan_service.get_usage_stats(current_user.id)
+            user_plan = usage_stats.get("plan", {})
             if not user_plan or not user_plan.get("limits", {}).get("custom_branding", False):
                 raise HTTPException(
                     status_code=status.HTTP_403_FORBIDDEN,
