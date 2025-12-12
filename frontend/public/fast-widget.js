@@ -450,6 +450,38 @@
     });
   }
 
+  function updateBrandingFooter() {
+    // Update branding footer based on powered_by_text setting
+    if (!chatbot) return;
+    
+    // If powered_by_text is empty string or null, hide the branding footer completely
+    if (chatbot.powered_by_text === '' || chatbot.powered_by_text === null) {
+      brandingFooter.style.display = 'none';
+    } else {
+      // Show branding footer with custom text or default
+      brandingFooter.style.display = 'block';
+      const brandText = chatbot.powered_by_text || 'BotSmith';
+      
+      brandingFooter.innerHTML = `
+        <a href="https://botsmith.ai" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #9ca3af; font-size: 10px; display: flex; align-items: center; justify-content: center; gap: 4px; transition: color 0.2s;">
+          <span>Powered by</span>
+          <span style="font-weight: 600; color: ${currentTheme.primary};">${brandText}</span>
+        </a>
+      `;
+      
+      // Re-add hover effect
+      const brandingLink = brandingFooter.querySelector('a');
+      if (brandingLink) {
+        brandingLink.addEventListener('mouseenter', () => {
+          brandingLink.style.color = currentTheme.primary;
+        });
+        brandingLink.addEventListener('mouseleave', () => {
+          brandingLink.style.color = '#9ca3af';
+        });
+      }
+    }
+  }
+
   async function sendMessage(message) {
     if (!message.trim() || isSending) return;
     
