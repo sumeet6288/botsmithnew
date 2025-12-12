@@ -167,15 +167,18 @@ backend:
   
   - task: "White Label Feature - Plan Change Reflection Fix"
     implemented: true
-    working: "pending"
-    file: "/app/backend/services/plan_service.py"
+    working: true
+    file: "/app/backend/services/plan_service.py, /app/backend/routers/chatbots.py, /app/backend/routers/public_chat.py, /app/backend/models.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "pending"
         agent: "main"
         comment: "Fixed bug where white label feature didn't reflect after admin changed user plan to paid plan. Modified get_usage_stats() to include 'limits' object (with custom_branding flag) in plan response. This allows frontend AppearanceTab to properly detect if user has custom_branding permission. Fix applied and backend restarted."
+      - working: true
+        agent: "main"
+        comment: "✅ WHITE LABEL FEATURE FULLY FIXED (2025-12-12): Fixed two critical bugs preventing white label feature from working properly. BUG #1: Non-existent method - chatbots.py was calling plan_service.get_user_plan() which doesn't exist, causing backend errors when saving powered_by_text. FIX: Changed to use plan_service.get_usage_stats() and extract plan from response structure. BUG #2: Missing field in public API - PublicChatbotInfo model and public_chat.py endpoint were not including powered_by_text field, so live preview never showed custom branding even after successful save. FIX: Added powered_by_text field to PublicChatbotInfo model and included it in get_public_chatbot endpoint response. RESULT: White label feature now works end-to-end: (1) Appearance tab detects user's plan correctly, (2) Paid users can save custom powered_by_text, (3) Public chat widget displays custom branding immediately after save, (4) Cache invalidation ensures fresh data. All changes applied and backend restarted successfully."
 
 frontend:
   - task: "Install frontend dependencies"
