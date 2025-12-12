@@ -572,6 +572,7 @@ class ChatbotUpdate(BaseModel):
     widget_theme: Optional[Literal["light", "dark", "auto"]] = None
     widget_size: Optional[Literal["small", "medium", "large"]] = None
     auto_expand: Optional[bool] = None
+    powered_by_text: Optional[str] = None  # Custom "Powered by [Brand]" text
     rate_limit_enabled: Optional[bool] = None
     messages_per_hour: Optional[int] = None
     webhook_url: Optional[str] = None
