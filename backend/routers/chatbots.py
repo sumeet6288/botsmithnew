@@ -169,6 +169,21 @@ async def update_chatbot(
         if "instructions" in update_data and update_data["instructions"] is not None:
             update_data["system_message"] = update_data["instructions"]
         
+        # Validate white label branding feature (powered_by_text) - only for paid plans
+        if "powered_by_text" in update_data and update_data["powered_by_text"] is not None:
+            # Check if user's plan has custom_branding enabled
+            user_plan = await plan_service.get_user_plan(current_user.id)
+            if not user_plan or not user_plan.get("limits", {}).get("custom_branding", False):
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail={
+                        "message": "Custom white label branding is only available on Starter, Professional, and Enterprise plans",
+                        "feature": "custom_branding",
+                        "upgrade_required": True,
+                        "current_plan": user_plan.get("name", "Free") if user_plan else "Free"
+                    }
+                )
+        
         if update_data:
             update_data["updated_at"] = datetime.now(timezone.utc)
             
