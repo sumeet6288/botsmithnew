@@ -526,6 +526,9 @@ class Chatbot(BaseModel):
     widget_size: Literal["small", "medium", "large"] = "medium"
     auto_expand: bool = False
     
+    # White Label Branding (for paid plans only)
+    powered_by_text: Optional[str] = None  # Custom "Powered by [Brand]" text for paid plans
+    
     # Rate Limiting
     rate_limit_enabled: bool = False
     messages_per_hour: int = 60
