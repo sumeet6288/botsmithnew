@@ -826,6 +826,7 @@ class PublicChatbotInfo(BaseModel):
     widget_position: Optional[str] = "bottom-right"
     widget_size: Optional[str] = "medium"
     auto_expand: Optional[bool] = False
+    powered_by_text: Optional[str] = None
 
 
 class PublicChatRequest(BaseModel):
