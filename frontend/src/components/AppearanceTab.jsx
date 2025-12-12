@@ -17,13 +17,31 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
     bubble_style: chatbot?.bubble_style || 'rounded',
     widget_size: chatbot?.widget_size || 'medium',
     auto_expand: chatbot?.auto_expand || false,
+    powered_by_text: chatbot?.powered_by_text || '',
   });
 
   const [saving, setSaving] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [userPlan, setUserPlan] = useState(null);
+  const [loadingPlan, setLoadingPlan] = useState(true);
   const logoInputRef = useRef(null);
   const avatarInputRef = useRef(null);
+
+  // Fetch user's plan to check if they have custom branding
+  useEffect(() => {
+    const fetchUserPlan = async () => {
+      try {
+        const response = await plansAPI.getUsageStats();
+        setUserPlan(response.data.plan);
+      } catch (error) {
+        console.error('Error fetching user plan:', error);
+      } finally {
+        setLoadingPlan(false);
+      }
+    };
+    fetchUserPlan();
+  }, []);
 
   const handleChange = (field, value) => {
     setCustomization(prev => ({ ...prev, [field]: value }));
