@@ -360,18 +360,33 @@ const PublicChat = () => {
             </button>
           </form>
           
-          {/* Branding Footer */}
-          <div className="mt-2 text-center">
-            <a 
-              href="https://botsmith.ai" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-purple-600 transition-colors"
-            >
-              <span>Powered by</span>
-              <span className="font-semibold" style={{ color: chatbot.primary_color }}>BotSmith</span>
-            </a>
-          </div>
+          {/* Branding Footer - White Label Support */}
+          {(chatbot.powered_by_text !== null && chatbot.powered_by_text !== undefined && chatbot.powered_by_text !== '') ? (
+            <div className="mt-2 text-center">
+              <span className="inline-flex items-center gap-1 text-xs text-gray-400">
+                <span>Powered by</span>
+                <span className="font-semibold" style={{ color: chatbot.primary_color }}>
+                  {chatbot.powered_by_text}
+                </span>
+              </span>
+            </div>
+          ) : chatbot.powered_by_text === '' ? (
+            // Empty string means user wants to hide branding completely (paid plan feature)
+            <div className="mt-2"></div>
+          ) : (
+            // Default branding for free users
+            <div className="mt-2 text-center">
+              <a 
+                href="https://botsmith.ai" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-purple-600 transition-colors"
+              >
+                <span>Powered by</span>
+                <span className="font-semibold" style={{ color: chatbot.primary_color }}>BotSmith</span>
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>
