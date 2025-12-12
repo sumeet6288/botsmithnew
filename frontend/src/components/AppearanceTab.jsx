@@ -116,8 +116,9 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
       if (response.data.success) {
         setCustomization(prev => ({ ...prev, logo_url: response.data.url }));
         toast.success('Logo uploaded successfully!');
+        // Non-blocking refresh
         if (onUpdate) {
-          await onUpdate();
+          onUpdate().catch(err => console.error('Error refreshing chatbot:', err));
         }
       }
     } catch (error) {
@@ -157,8 +158,9 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
       if (response.data.success) {
         setCustomization(prev => ({ ...prev, avatar_url: response.data.url }));
         toast.success('Avatar uploaded successfully!');
+        // Non-blocking refresh
         if (onUpdate) {
-          await onUpdate();
+          onUpdate().catch(err => console.error('Error refreshing chatbot:', err));
         }
       }
     } catch (error) {
@@ -178,8 +180,9 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
       setCustomization(prev => ({ ...prev, logo_url: '' }));
       await chatbotAPI.update(chatbot.id, { logo_url: '' });
       toast.success('Logo removed successfully!');
+      // Non-blocking refresh
       if (onUpdate) {
-        await onUpdate();
+        onUpdate().catch(err => console.error('Error refreshing chatbot:', err));
       }
     } catch (error) {
       console.error('Error removing logo:', error);
@@ -192,8 +195,9 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
       setCustomization(prev => ({ ...prev, avatar_url: '' }));
       await chatbotAPI.update(chatbot.id, { avatar_url: '' });
       toast.success('Avatar removed successfully!');
+      // Non-blocking refresh
       if (onUpdate) {
-        await onUpdate();
+        onUpdate().catch(err => console.error('Error refreshing chatbot:', err));
       }
     } catch (error) {
       console.error('Error removing avatar:', error);
