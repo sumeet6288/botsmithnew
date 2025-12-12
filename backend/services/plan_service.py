@@ -452,7 +452,8 @@ class PlanService:
             "plan": {
                 "id": plan["id"],
                 "name": plan["name"],
-                "price": plan["price"]
+                "price": plan["price"],
+                "limits": limits  # Include limits with custom_branding flag for frontend
             },
             "subscription": {
                 "status": subscription.get("status", "active"),
