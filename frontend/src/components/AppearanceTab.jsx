@@ -73,8 +73,9 @@ const AppearanceTab = ({ chatbot, onUpdate }) => {
     try {
       await chatbotAPI.update(chatbot.id, customization);
       toast.success('Appearance updated successfully! Open the live preview to see changes.');
+      // Non-blocking refresh - don't wait for it
       if (onUpdate) {
-        await onUpdate();
+        onUpdate().catch(err => console.error('Error refreshing chatbot:', err));
       }
     } catch (error) {
       console.error('Error updating appearance:', error);
