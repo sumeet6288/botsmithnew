@@ -164,6 +164,18 @@ backend:
       - working: true
         agent: "main"
         comment: "Backend server started successfully on port 8001. Default admin user created (admin@botsmith.com / admin123). Application startup complete with Discord bot manager initialized."
+  
+  - task: "White Label Feature - Plan Change Reflection Fix"
+    implemented: true
+    working: "pending"
+    file: "/app/backend/services/plan_service.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "pending"
+        agent: "main"
+        comment: "Fixed bug where white label feature didn't reflect after admin changed user plan to paid plan. Modified get_usage_stats() to include 'limits' object (with custom_branding flag) in plan response. This allows frontend AppearanceTab to properly detect if user has custom_branding permission. Fix applied and backend restarted."
 
 frontend:
   - task: "Install frontend dependencies"
