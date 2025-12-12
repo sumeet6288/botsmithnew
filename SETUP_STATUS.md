@@ -42,7 +42,7 @@
 ## 🌐 Access URLs
 
 ### Frontend (React Application)
-- **Public URL**: https://deploy-mongo-app.preview.emergentagent.com
+- **Public URL**: https://appearance-persist.preview.emergentagent.com
 - **Status**: ✅ HTTP 200 - Accessible
 - **Features**: 
   - Landing page
@@ -53,9 +53,9 @@
   - Subscription management
 
 ### Backend (FastAPI)
-- **API Documentation**: https://deploy-mongo-app.preview.emergentagent.com/docs
+- **API Documentation**: https://appearance-persist.preview.emergentagent.com/docs
 - **Status**: ✅ HTTP 200 - Accessible
-- **API Base URL**: https://deploy-mongo-app.preview.emergentagent.com/api
+- **API Base URL**: https://appearance-persist.preview.emergentagent.com/api
 - **Note**: All backend routes must use `/api` prefix for proper routing
 
 ## 📊 Service Status
@@ -89,7 +89,7 @@
 ## 🎯 Next Steps
 
 1. **Access the Application**:
-   - Visit: https://deploy-mongo-app.preview.emergentagent.com
+   - Visit: https://appearance-persist.preview.emergentagent.com
    - Click "Sign In" 
    - Use admin credentials: admin@botsmith.com / admin123
 
@@ -101,7 +101,7 @@
    - Manage users and subscriptions (Admin Panel)
 
 3. **API Documentation**:
-   - Visit: https://deploy-mongo-app.preview.emergentagent.com/docs
+   - Visit: https://appearance-persist.preview.emergentagent.com/docs
    - Test API endpoints interactively
    - View all available endpoints and schemas
 

@@ -333,7 +333,7 @@ No migration needed! The `powered_by_text` field:
 
 The white label "Powered by" feature is **complete and ready for production use**. All code is implemented, tested, and services are running successfully.
 
-**Application URL:** https://deploy-mongo-app.preview.emergentagent.com
+**Application URL:** https://appearance-persist.preview.emergentagent.com
 
 **Admin Login (with Starter plan for testing):**
 - Email: admin@botsmith.com
