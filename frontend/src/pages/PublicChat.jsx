@@ -377,7 +377,7 @@ const PublicChat = () => {
             // Default branding for free users
             <div className="mt-2 text-center">
               <a 
-                href="https://botsmith.ai" 
+                href="https://botsmith.io" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-purple-600 transition-colors"

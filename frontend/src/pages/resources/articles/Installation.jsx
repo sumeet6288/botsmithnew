@@ -59,7 +59,7 @@ const Installation = () => {
                       <ul className="space-y-2 text-gray-700">
                         <li className="flex items-start gap-2">
                           <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <span>Visit <strong>botsmith.ai</strong> (or your BotSmith URL)</span>
+                          <span>Visit <strong>botsmith.io</strong> (or your BotSmith URL)</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />

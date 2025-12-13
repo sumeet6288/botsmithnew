@@ -85,7 +85,7 @@ const HelpCenter = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email Support',
-      description: 'support@botsmith.ai',
+      description: 'support@botsmith.io',
       action: 'Send Email',
       gradient: 'from-purple-500 to-pink-600'
     },
@@ -195,7 +195,7 @@ const HelpCenter = () => {
                     className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
                     onClick={() => {
                       if (option.title === 'Email Support') {
-                        window.location.href = 'mailto:support@botsmith.ai';
+                        window.location.href = 'mailto:support@botsmith.io';
                       }
                     }}
                   >

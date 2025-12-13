@@ -1552,7 +1552,7 @@ Tools & Infrastructure:          10% ($30K)
 
 **Ready to discuss investment opportunity:**
 
-📧 Email: founders@botsmith.ai  
+📧 Email: founders@botsmith.io  
 📱 Phone: [Investor Relations Number]  
 🌐 Platform Demo: https://quick-stack-deploy-2.preview.emergentagent.com  
 📊 Investor Deck: [Link to full slide deck]  

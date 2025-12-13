@@ -393,11 +393,11 @@ const CookiePolicy = () => {
             <div className="space-y-2">
               <p className="text-gray-700 flex items-center gap-2">
                 <Cookie className="w-4 h-4 text-orange-600" />
-                <strong>Email:</strong> privacy@botsmith.ai
+                <strong>Email:</strong> privacy@botsmith.io
               </p>
               <p className="text-gray-700 flex items-center gap-2">
                 <Info className="w-4 h-4 text-orange-600" />
-                <strong>Support:</strong> support@botsmith.ai
+                <strong>Support:</strong> support@botsmith.io
               </p>
             </div>
           </section>

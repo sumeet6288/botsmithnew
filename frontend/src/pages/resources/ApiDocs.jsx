@@ -19,7 +19,7 @@ const ApiDocs = () => {
       path: '/api/chatbots',
       description: 'List all chatbots',
       auth: 'Required',
-      example: `curl -X GET 'https://api.botsmith.ai/api/chatbots' \\
+      example: `curl -X GET 'https://api.botsmith.io/api/chatbots' \\
   -H 'Authorization: Bearer YOUR_API_KEY'`,
       response: `{
   "chatbots": [
@@ -38,7 +38,7 @@ const ApiDocs = () => {
       path: '/api/chatbots',
       description: 'Create a new chatbot',
       auth: 'Required',
-      example: `curl -X POST 'https://api.botsmith.ai/api/chatbots' \\
+      example: `curl -X POST 'https://api.botsmith.io/api/chatbots' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{
@@ -59,7 +59,7 @@ const ApiDocs = () => {
       path: '/api/chat/send',
       description: 'Send a message to a chatbot',
       auth: 'Public',
-      example: `curl -X POST 'https://api.botsmith.ai/api/chat/send' \\
+      example: `curl -X POST 'https://api.botsmith.io/api/chat/send' \\
   -H 'Content-Type: application/json' \\
   -d '{
     "chatbot_id": "chatbot-123",
@@ -77,7 +77,7 @@ const ApiDocs = () => {
       path: '/api/sources/upload',
       description: 'Upload a file as knowledge source',
       auth: 'Required',
-      example: `curl -X POST 'https://api.botsmith.ai/api/sources/upload' \\
+      example: `curl -X POST 'https://api.botsmith.io/api/sources/upload' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -F 'file=@/path/to/document.pdf' \\
   -F 'chatbot_id=chatbot-123'`,
@@ -93,7 +93,7 @@ const ApiDocs = () => {
       path: '/api/analytics/chatbot/{id}',
       description: 'Get chatbot analytics',
       auth: 'Required',
-      example: `curl -X GET 'https://api.botsmith.ai/api/analytics/chatbot/chatbot-123?days=30' \\
+      example: `curl -X GET 'https://api.botsmith.io/api/analytics/chatbot/chatbot-123?days=30' \\
   -H 'Authorization: Bearer YOUR_API_KEY'`,
       response: `{
   "total_conversations": 150,
@@ -154,13 +154,13 @@ print(response.message)`
     {
       language: 'cURL',
       code: `# Create a chatbot
-curl -X POST 'https://api.botsmith.ai/api/chatbots' \\
+curl -X POST 'https://api.botsmith.io/api/chatbots' \\
   -H 'Authorization: Bearer YOUR_API_KEY' \\
   -H 'Content-Type: application/json' \\
   -d '{"name": "My Bot", "model": "gpt-4o-mini"}'
 
 # Send a message
-curl -X POST 'https://api.botsmith.ai/api/chat/send' \\
+curl -X POST 'https://api.botsmith.io/api/chat/send' \\
   -H 'Content-Type: application/json' \\
   -d '{
     "chatbot_id": "chatbot-123",
@@ -240,7 +240,7 @@ curl -X POST 'https://api.botsmith.ai/api/chat/send' \\
             <div className="bg-white rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-3 text-gray-900">Base URL</h3>
               <div className="bg-gray-100 rounded-lg p-4 font-mono text-purple-600 font-semibold">
-                https://api.botsmith.ai
+                https://api.botsmith.io
               </div>
             </div>
           </div>

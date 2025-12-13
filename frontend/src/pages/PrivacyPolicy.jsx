@@ -303,11 +303,11 @@ const PrivacyPolicy = () => {
             <div className="space-y-2">
               <p className="text-gray-700 flex items-center gap-2">
                 <Mail className="w-4 h-4 text-purple-600" />
-                <strong>Email:</strong> privacy@botsmith.ai
+                <strong>Email:</strong> privacy@botsmith.io
               </p>
               <p className="text-gray-700 flex items-center gap-2">
                 <Shield className="w-4 h-4 text-purple-600" />
-                <strong>Data Protection Officer:</strong> dpo@botsmith.ai
+                <strong>Data Protection Officer:</strong> dpo@botsmith.io
               </p>
             </div>
           </section>

@@ -183,7 +183,7 @@ const Documentation = () => {
               <Button 
                 variant="outline" 
                 className="border-2 border-white text-white hover:bg-white/10"
-                onClick={() => window.location.href = 'mailto:support@botsmith.ai'}
+                onClick={() => window.location.href = 'mailto:support@botsmith.io'}
               >
                 Contact Support
               </Button>
