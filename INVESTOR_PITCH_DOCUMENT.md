@@ -1554,7 +1554,7 @@ Tools & Infrastructure:          10% ($30K)
 
 📧 Email: founders@botsmith.io  
 📱 Phone: [Investor Relations Number]  
-🌐 Platform Demo: https://quick-stack-deploy-2.preview.emergentagent.com  
+🌐 Platform Demo: https://stack-deploy-flow.preview.emergentagent.com  
 📊 Investor Deck: [Link to full slide deck]  
 📈 Financial Model: [Link to detailed Excel model]
 
