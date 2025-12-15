@@ -564,6 +564,7 @@ class ChatbotUpdate(BaseModel):
     public_access: Optional[bool] = None
     primary_color: Optional[str] = None
     secondary_color: Optional[str] = None
+    accent_color: Optional[str] = None
     welcome_message: Optional[str] = None
     logo_url: Optional[str] = None
     avatar_url: Optional[str] = None
