@@ -1,5 +1,5 @@
 from celery import Task
-from celery_app import celery_app
+from backend.celery_app import celery_app
 import asyncio
 from typing import Dict, Any
 import logging
