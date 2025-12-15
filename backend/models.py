@@ -520,6 +520,7 @@ class Chatbot(BaseModel):
     avatar_url: Optional[str] = None
     font_family: str = "Inter, system-ui, sans-serif"
     font_size: Literal["small", "medium", "large"] = "medium"
+    bubble_style: str = "rounded"
     
     # Widget Settings
     widget_position: Literal["bottom-right", "bottom-left", "top-right", "top-left"] = "bottom-right"
