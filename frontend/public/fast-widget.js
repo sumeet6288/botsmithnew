@@ -324,6 +324,8 @@
     typingDiv.className = 'botsmith-message-item';
     typingDiv.style.cssText = 'display: flex; gap: 8px; align-items: center;';
     
+    const bubbleRadius = getBubbleRadius();
+    
     const avatarContent = chatbot?.avatar_url 
       ? `<img src="${chatbot.avatar_url}" alt="Bot" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">`
       : `<svg width="18" height="18" viewBox="0 0 24 24" fill="white">
@@ -331,10 +333,10 @@
         </svg>`;
     
     typingDiv.innerHTML = `
-      <div style="width: 32px; height: 32px; border-radius: 50%; background: ${currentTheme.secondary}; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+      <div style="width: 32px; height: 32px; border-radius: 50%; background: ${customization.accent_color}; display: flex; align-items: center; justify-content: center; overflow: hidden;">
         ${avatarContent}
       </div>
-      <div style="padding: 12px 16px; border-radius: 18px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <div style="padding: 12px 16px; border-radius: ${bubbleRadius}; background: #f3f4f6; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <span class="botsmith-typing-dot"></span>
         <span class="botsmith-typing-dot"></span>
         <span class="botsmith-typing-dot"></span>
