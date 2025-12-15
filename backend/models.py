@@ -608,6 +608,7 @@ class ChatbotResponse(BaseModel):
     avatar_url: Optional[str] = None
     font_family: str = "Inter, system-ui, sans-serif"
     font_size: str = "medium"
+    bubble_style: str = "rounded"
     widget_position: str = "bottom-right"
     widget_theme: str = "auto"
     widget_size: str = "medium"
