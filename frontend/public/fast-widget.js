@@ -114,15 +114,19 @@
   // Create container
   const container = document.createElement('div');
   container.id = 'botsmith-container';
-  container.style.cssText = `
-    position: fixed;
-    ${currentPosition.bottom ? `bottom: ${currentPosition.bottom};` : ''}
-    ${currentPosition.top ? `top: ${currentPosition.top};` : ''}
-    ${currentPosition.left ? `left: ${currentPosition.left};` : ''}
-    ${currentPosition.right ? `right: ${currentPosition.right};` : ''}
-    z-index: 999999;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  `;
+  
+  function updateContainerStyle() {
+    container.style.cssText = `
+      position: fixed;
+      ${currentPosition.bottom ? `bottom: ${currentPosition.bottom};` : ''}
+      ${currentPosition.top ? `top: ${currentPosition.top};` : ''}
+      ${currentPosition.left ? `left: ${currentPosition.left};` : ''}
+      ${currentPosition.right ? `right: ${currentPosition.right};` : ''}
+      z-index: 999999;
+      font-family: ${customization.font_family};
+    `;
+  }
+  updateContainerStyle();
 
   // Create chat bubble
   const bubble = document.createElement('button');
