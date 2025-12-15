@@ -37,6 +37,14 @@
   let isLoading = false;
   let isSending = false;
   
+  // Customization defaults
+  let customization = {
+    accent_color: '#ec4899',
+    font_family: 'Inter, system-ui, sans-serif',
+    font_size: 'medium',
+    bubble_style: 'rounded'
+  };
+  
   // Position styles
   const positions = {
     'bottom-right': { bottom: '20px', right: '20px' },
