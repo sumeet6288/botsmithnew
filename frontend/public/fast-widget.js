@@ -394,6 +394,13 @@
       // Apply customization settings (accent_color, font_family, font_size, bubble_style)
       if (chatbot.accent_color) {
         customization.accent_color = chatbot.accent_color;
+        
+        // Update send button with new accent color
+        const sendBtn = document.getElementById('botsmith-send');
+        if (sendBtn) sendBtn.style.background = customization.accent_color;
+        
+        // Update bot avatar colors
+        updateBotAvatarColors();
       }
       if (chatbot.font_family) {
         customization.font_family = chatbot.font_family;
