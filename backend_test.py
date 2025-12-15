@@ -13,7 +13,7 @@ import os
 import sys
 
 # Backend URL from environment
-BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://dev-env-bootstrap.preview.emergentagent.com')
+BACKEND_URL = os.getenv('REACT_APP_BACKEND_URL', 'https://dev-pipeline-5.preview.emergentagent.com')
 API_BASE = f"{BACKEND_URL}/api"
 
 class WhiteLabelTester:

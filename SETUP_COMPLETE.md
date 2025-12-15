@@ -211,13 +211,13 @@ code-server      RUNNING   pid 656, uptime 0:00:18
 ## 🔗 Application URLs
 
 ### 🌟 Main Application
-**Frontend URL:** https://dev-env-bootstrap.preview.emergentagent.com
+**Frontend URL:** https://dev-pipeline-5.preview.emergentagent.com
 **Status:** ✅ 200 OK (Fully Operational)
 
 ### 🔧 Backend API
-**API Base URL:** https://dev-env-bootstrap.preview.emergentagent.com/api
-**API Documentation:** https://dev-env-bootstrap.preview.emergentagent.com/api/docs
-**Health Check:** https://dev-env-bootstrap.preview.emergentagent.com/api/health
+**API Base URL:** https://dev-pipeline-5.preview.emergentagent.com/api
+**API Documentation:** https://dev-pipeline-5.preview.emergentagent.com/api/docs
+**Health Check:** https://dev-pipeline-5.preview.emergentagent.com/api/health
 **Status:** ✅ 200 OK (Fully Operational)
 
 ---
@@ -272,7 +272,7 @@ EMERGENT_LLM_KEY=sk-emergent-919922434748629944
 
 ### Frontend Environment (/app/frontend/.env)
 ```env
-REACT_APP_BACKEND_URL=https://dev-env-bootstrap.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://dev-pipeline-5.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 REACT_APP_ENABLE_VISUAL_EDITS=true
 ENABLE_HEALTH_CHECK=false
@@ -283,7 +283,7 @@ ENABLE_HEALTH_CHECK=false
 ## 🚦 Quick Start Guide
 
 ### 1. Access the Application
-Visit: https://dev-env-bootstrap.preview.emergentagent.com
+Visit: https://dev-pipeline-5.preview.emergentagent.com
 
 ### 2. Sign In as Admin
 - Click **"Sign in"** in the top right
@@ -367,6 +367,6 @@ tail -50 /var/log/supervisor/frontend.err.log
 
 Your BotSmith AI application is now **fully operational** and ready for use. All dependencies are installed, the database is properly configured, and all services are running smoothly.
 
-**Preview your application:** https://dev-env-bootstrap.preview.emergentagent.com
+**Preview your application:** https://dev-pipeline-5.preview.emergentagent.com
 
 Enjoy building intelligent AI chatbots! 🤖✨
