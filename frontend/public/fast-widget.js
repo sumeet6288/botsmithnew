@@ -303,7 +303,7 @@
         `;
       } else {
         msgDiv.innerHTML = `
-          <div style="max-width: 70%; padding: 12px 16px; border-radius: ${bubbleRadius}; background: ${currentTheme.primary}; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word; font-size: ${fontSize}; line-height: 1.5; font-family: ${customization.font_family};">
+          <div style="max-width: 70%; padding: 12px 16px; border-radius: ${bubbleRadius}; background: ${customization.accent_color}; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word; font-size: ${fontSize}; line-height: 1.5; font-family: ${customization.font_family};">
             ${msg.content}
           </div>
         `;
