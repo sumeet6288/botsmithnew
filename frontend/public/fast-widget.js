@@ -498,11 +498,11 @@
   }
   
   function updateBotAvatarColors() {
-    // Update all existing bot avatars
+    // Update all existing bot avatars with accent color
     const avatars = messagesContainer.querySelectorAll('div[style*="background"]');
     avatars.forEach(avatar => {
       if (avatar.querySelector('svg')) {
-        avatar.style.background = currentTheme.secondary;
+        avatar.style.background = customization.accent_color;
       }
     });
   }
