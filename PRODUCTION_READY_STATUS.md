@@ -2,7 +2,7 @@
 
 **Date:** December 13, 2025  
 **Status:** ✅ PRODUCTION READY  
-**Preview URL:** https://stack-deploy-flow.preview.emergentagent.com
+**Preview URL:** https://stack-installer-1.preview.emergentagent.com
 
 ---
 
@@ -126,7 +126,7 @@ EMERGENT_LLM_KEY=sk-emergent-919922434748629944
 
 ### Frontend (.env) ✅
 ```bash
-REACT_APP_BACKEND_URL=https://stack-deploy-flow.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://stack-installer-1.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 REACT_APP_ENABLE_VISUAL_EDITS=false
 ENABLE_HEALTH_CHECK=false
@@ -221,7 +221,7 @@ ENABLE_HEALTH_CHECK=false
 
 ## 📊 API Documentation
 
-**Swagger UI:** https://stack-deploy-flow.preview.emergentagent.com/api/docs
+**Swagger UI:** https://stack-installer-1.preview.emergentagent.com/api/docs
 
 ### Key Endpoints
 - **Authentication:** `/api/auth/login`, `/api/auth/register`
@@ -345,8 +345,8 @@ tail -f /var/log/supervisor/mongodb.out.log
 
 ## 📞 Access Information
 
-**Application URL:** https://stack-deploy-flow.preview.emergentagent.com  
-**API Docs:** https://stack-deploy-flow.preview.emergentagent.com/api/docs  
+**Application URL:** https://stack-installer-1.preview.emergentagent.com  
+**API Docs:** https://stack-installer-1.preview.emergentagent.com/api/docs  
 **Admin Login:** admin@botsmith.com / admin123  
 
 **Service Ports:**

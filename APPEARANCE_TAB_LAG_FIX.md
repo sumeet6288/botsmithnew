@@ -111,7 +111,7 @@ const handleSave = async () => {
 - ✅ Changes applied to production code
 - ✅ Frontend compiled successfully
 - ✅ All services running (Backend, Frontend, MongoDB)
-- ✅ Application accessible at: https://stack-deploy-flow.preview.emergentagent.com
+- ✅ Application accessible at: https://stack-installer-1.preview.emergentagent.com
 
 ## Recommendations
 

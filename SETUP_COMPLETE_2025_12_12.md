@@ -113,9 +113,9 @@ All services running successfully:
 ## 🌐 Application URLs
 
 ### Production URLs:
-- 🎯 **Main Application:** https://stack-deploy-flow.preview.emergentagent.com
-- 📖 **API Documentation:** https://stack-deploy-flow.preview.emergentagent.com/api/docs
-- 🔗 **API Endpoint:** https://stack-deploy-flow.preview.emergentagent.com/api
+- 🎯 **Main Application:** https://stack-installer-1.preview.emergentagent.com
+- 📖 **API Documentation:** https://stack-installer-1.preview.emergentagent.com/api/docs
+- 🔗 **API Endpoint:** https://stack-installer-1.preview.emergentagent.com/api
 
 ### Local URLs (Development):
 - 🏠 **Frontend:** http://localhost:3000
@@ -138,7 +138,7 @@ EMERGENT_LLM_KEY=[CONFIGURED]
 
 ### Frontend (.env)
 ```env
-REACT_APP_BACKEND_URL=https://stack-deploy-flow.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://stack-installer-1.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 REACT_APP_ENABLE_VISUAL_EDITS=true
 ENABLE_HEALTH_CHECK=false
@@ -233,7 +233,7 @@ ENABLE_HEALTH_CHECK=false
 ## 🚀 Next Steps
 
 ### 1. Access the Application
-Visit: https://stack-deploy-flow.preview.emergentagent.com
+Visit: https://stack-installer-1.preview.emergentagent.com
 
 ### 2. Login as Admin
 - Email: admin@botsmith.com
@@ -366,7 +366,7 @@ The BotSmith AI chatbot builder application is now fully installed, configured, 
 ## 📞 Support & Documentation
 
 - 📖 **API Docs:** /api/docs
-- 🔗 **Preview URL:** https://stack-deploy-flow.preview.emergentagent.com
+- 🔗 **Preview URL:** https://stack-installer-1.preview.emergentagent.com
 - 👤 **Default Admin:** admin@botsmith.com / admin123
 - 📁 **Test Results:** /app/test_result.md
 
