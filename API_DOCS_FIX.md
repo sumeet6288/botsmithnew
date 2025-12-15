@@ -68,9 +68,9 @@ csp = (
 ## Results
 
 ### ✅ API Documentation Now Accessible At:
-- **Swagger UI**: https://stack-installer-1.preview.emergentagent.com/api/docs
-- **ReDoc**: https://stack-installer-1.preview.emergentagent.com/api/redoc
-- **OpenAPI JSON**: https://stack-installer-1.preview.emergentagent.com/api/openapi.json
+- **Swagger UI**: https://widget-color-fix.preview.emergentagent.com/api/docs
+- **ReDoc**: https://widget-color-fix.preview.emergentagent.com/api/redoc
+- **OpenAPI JSON**: https://widget-color-fix.preview.emergentagent.com/api/openapi.json
 
 ### ✅ Features Working:
 - Full Swagger UI interface rendering correctly
