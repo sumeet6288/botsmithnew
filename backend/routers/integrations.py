@@ -175,6 +175,24 @@ async def test_integration_connection(integration_type: str, credentials: dict) 
             result = await teams_service.validate_credentials()
             return result
         
+        elif integration_type == "zapier":
+            # Test Zapier Webhook URL
+            if not credentials.get("webhook_url"):
+                return {"success": False, "message": "Missing webhook URL"}
+            
+            # Validate webhook URL by sending test payload
+            from services.zapier_service import ZapierService
+            zapier_service = ZapierService(
+                credentials.get("webhook_url"),
+                credentials.get("api_key")
+            )
+            result = await zapier_service.verify_webhook()
+            
+            if result.get("success"):
+                return {"success": True, "message": result.get("message", "Webhook verified successfully")}
+            else:
+                return {"success": False, "message": result.get("error", "Failed to verify webhook")}
+        
         else:
             return {"success": False, "message": "Unknown integration type"}
             
