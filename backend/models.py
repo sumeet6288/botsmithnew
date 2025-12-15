@@ -600,6 +600,7 @@ class ChatbotResponse(BaseModel):
     public_access: bool = True
     primary_color: str = "#7c3aed"
     secondary_color: str = "#ec4899"
+    accent_color: str = "#ec4899"
     welcome_message: str = "Hi! I'm your AI assistant. How can I help you today?"
     logo_url: Optional[str] = None
     avatar_url: Optional[str] = None
