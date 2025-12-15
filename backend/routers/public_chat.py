@@ -228,6 +228,20 @@ async def public_chat(chatbot_id: str, request: PublicChatRequest):
             ai_response=ai_response
         )
     
+    # Send Zapier webhook notification (non-blocking)
+    from routers.zapier import notify_zapier_webhook
+    asyncio.create_task(
+        notify_zapier_webhook(
+            chatbot_id=chatbot_id,
+            conversation_id=conversation_id,
+            user_message=request.message,
+            bot_response=ai_response,
+            user_id=request.session_id,
+            user_name="Anonymous",
+            metadata={"platform": "public_chat"}
+        )
+    )
+    
     return ChatResponse(
         message=ai_response,
         conversation_id=conversation_id,
