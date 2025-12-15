@@ -185,6 +185,23 @@ async def send_message(chat_request: ChatRequest):
             increment_usage_task
         )
         
+        # Send Zapier webhook notification (non-blocking)
+        from routers.zapier import notify_zapier_webhook
+        asyncio.create_task(
+            notify_zapier_webhook(
+                chatbot_id=chat_request.chatbot_id,
+                conversation_id=conversation.id,
+                user_message=chat_request.message,
+                bot_response=ai_response,
+                user_id=chat_request.session_id,
+                user_name=chat_request.user_name or "Anonymous",
+                metadata={
+                    "user_email": chat_request.user_email,
+                    "platform": "webchat"
+                }
+            )
+        )
+        
         return ChatResponse(
             message=ai_response,
             conversation_id=conversation.id,
