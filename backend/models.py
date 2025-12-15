@@ -1030,6 +1030,17 @@ class WhatsAppMessage(BaseModel):
     text: str
 
 
+# Zapier Integration Models
+class ZapierWebhookPayload(BaseModel):
+    message: Optional[str] = None
+    text: Optional[str] = None
+    content: Optional[str] = None
+    user_id: Optional[str] = "zapier_user"
+    user_name: Optional[str] = "Zapier User"
+    conversation_id: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
+
+
 # Plan Models
 class PlanLimits(BaseModel):
     max_chatbots: int
