@@ -252,8 +252,31 @@
     renderMessages();
   }
 
+  function getBubbleRadius() {
+    // Get border radius based on bubble_style
+    const styles = {
+      'rounded': '18px',
+      'smooth': '12px',
+      'square': '4px'
+    };
+    return styles[customization.bubble_style] || '18px';
+  }
+  
+  function getFontSize() {
+    // Get font size based on customization
+    const sizes = {
+      'small': '14px',
+      'medium': '16px',
+      'large': '18px'
+    };
+    return sizes[customization.font_size] || '16px';
+  }
+
   function renderMessages() {
     messagesContainer.innerHTML = '';
+    const bubbleRadius = getBubbleRadius();
+    const fontSize = getFontSize();
+    
     messages.forEach((msg, index) => {
       const msgDiv = document.createElement('div');
       msgDiv.className = 'botsmith-message-item';
@@ -271,16 +294,16 @@
             </svg>`;
             
         msgDiv.innerHTML = `
-          <div style="width: 32px; height: 32px; border-radius: 50%; background: ${currentTheme.secondary}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: ${customization.accent_color}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;">
             ${avatarContent}
           </div>
-          <div style="max-width: 70%; padding: 12px 16px; border-radius: 18px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word; font-size: 13px; line-height: 1.5;">
+          <div style="max-width: 70%; padding: 12px 16px; border-radius: ${bubbleRadius}; background: #f3f4f6; box-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word; font-size: ${fontSize}; line-height: 1.5; font-family: ${customization.font_family};">
             ${msg.content}
           </div>
         `;
       } else {
         msgDiv.innerHTML = `
-          <div style="max-width: 70%; padding: 12px 16px; border-radius: 18px; background: ${currentTheme.primary}; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word; font-size: 13px; line-height: 1.5;">
+          <div style="max-width: 70%; padding: 12px 16px; border-radius: ${bubbleRadius}; background: ${currentTheme.primary}; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); word-wrap: break-word; font-size: ${fontSize}; line-height: 1.5; font-family: ${customization.font_family};">
             ${msg.content}
           </div>
         `;
