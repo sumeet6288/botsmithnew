@@ -391,6 +391,26 @@
         }
       }
       
+      // Apply customization settings (accent_color, font_family, font_size, bubble_style)
+      if (chatbot.accent_color) {
+        customization.accent_color = chatbot.accent_color;
+      }
+      if (chatbot.font_family) {
+        customization.font_family = chatbot.font_family;
+        updateContainerStyle();
+      }
+      if (chatbot.font_size) {
+        customization.font_size = chatbot.font_size;
+      }
+      if (chatbot.bubble_style) {
+        customization.bubble_style = chatbot.bubble_style;
+      }
+      
+      // Re-render messages to apply new customization
+      if (messages.length > 0) {
+        renderMessages();
+      }
+      
       // Update logo if available
       if (chatbot.logo_url) {
         // Find the logo container more specifically - it's the first div inside the flex container
