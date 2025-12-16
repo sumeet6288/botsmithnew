@@ -130,7 +130,7 @@ class AsyncTask(Task):
         return await self.run(*args, **kwargs)
 
 
-@celery_app.task(name='backend.tasks.process_document', bind=True)
+@celery_app.task(name='backend.tasks.process_document', bind=True, base=IdempotentTask, max_retries=3, default_retry_delay=60)
 def process_document(self, source_id: str, file_path: str, chatbot_id: str) -> Dict[str, Any]:
     """
     Background task to process uploaded documents
@@ -206,7 +206,7 @@ def process_document(self, source_id: str, file_path: str, chatbot_id: str) -> D
         raise
 
 
-@celery_app.task(name='backend.tasks.scrape_website', bind=True)
+@celery_app.task(name='backend.tasks.scrape_website', bind=True, base=IdempotentTask, max_retries=3, default_retry_delay=60)
 def scrape_website(self, source_id: str, url: str, chatbot_id: str) -> Dict[str, Any]:
     """
     Background task to scrape website content
@@ -283,7 +283,7 @@ def scrape_website(self, source_id: str, url: str, chatbot_id: str) -> Dict[str,
         raise
 
 
-@celery_app.task(name='backend.tasks.send_notification')
+@celery_app.task(name='backend.tasks.send_notification', base=IdempotentTask, max_retries=3, default_retry_delay=30)
 def send_notification(user_id: str, title: str, message: str, notification_type: str = 'info') -> Dict[str, Any]:
     """
     Background task to send notifications
@@ -330,7 +330,7 @@ def send_notification(user_id: str, title: str, message: str, notification_type:
         raise
 
 
-@celery_app.task(name='backend.tasks.cleanup_old_data')
+@celery_app.task(name='backend.tasks.cleanup_old_data', base=IdempotentTask, max_retries=2)
 def cleanup_old_data(days: int = 90) -> Dict[str, Any]:
     """
     Background task to cleanup old data
@@ -373,7 +373,7 @@ def cleanup_old_data(days: int = 90) -> Dict[str, Any]:
         raise
 
 
-@celery_app.task(name='backend.tasks.generate_analytics_report')
+@celery_app.task(name='backend.tasks.generate_analytics_report', base=IdempotentTask, max_retries=2)
 def generate_analytics_report(chatbot_id: str, period: str = '30d') -> Dict[str, Any]:
     """
     Background task to generate comprehensive analytics reports
