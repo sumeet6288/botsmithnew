@@ -203,7 +203,16 @@ def process_document(self, source_id: str, file_path: str, chatbot_id: str) -> D
         except:
             pass
         
-        raise
+        # Retry with exponential backoff
+        try:
+            raise self.retry(exc=e, countdown=60 * (2 ** self.request.retries))
+        except self.MaxRetriesExceededError:
+            logger.error(f"Max retries exceeded for document {source_id}")
+            return {
+                'status': 'failed',
+                'source_id': source_id,
+                'error': str(e)
+            }
 
 
 @celery_app.task(name='backend.tasks.scrape_website', bind=True, base=IdempotentTask, max_retries=3, default_retry_delay=60)
@@ -280,7 +289,17 @@ def scrape_website(self, source_id: str, url: str, chatbot_id: str) -> Dict[str,
         except:
             pass
         
-        raise
+        # Retry with exponential backoff
+        try:
+            raise self.retry(exc=e, countdown=60 * (2 ** self.request.retries))
+        except self.MaxRetriesExceededError:
+            logger.error(f"Max retries exceeded for website {url}")
+            return {
+                'status': 'failed',
+                'source_id': source_id,
+                'url': url,
+                'error': str(e)
+            }
 
 
 @celery_app.task(name='backend.tasks.send_notification', base=IdempotentTask, max_retries=3, default_retry_delay=30)
@@ -327,7 +346,16 @@ def send_notification(user_id: str, title: str, message: str, notification_type:
         
     except Exception as e:
         logger.error(f"Error sending notification to {user_id}: {str(e)}")
-        raise
+        # Retry with shorter delay for notifications
+        try:
+            raise self.retry(exc=e, countdown=30 * (2 ** self.request.retries))
+        except self.MaxRetriesExceededError:
+            logger.error(f"Max retries exceeded for notification to {user_id}")
+            return {
+                'status': 'failed',
+                'user_id': user_id,
+                'error': str(e)
+            }
 
 
 @celery_app.task(name='backend.tasks.cleanup_old_data', base=IdempotentTask, max_retries=2)
@@ -370,7 +398,10 @@ def cleanup_old_data(days: int = 90) -> Dict[str, Any]:
         
     except Exception as e:
         logger.error(f"Error during cleanup: {str(e)}")
-        raise
+        return {
+            'status': 'failed',
+            'error': str(e)
+        }
 
 
 @celery_app.task(name='backend.tasks.generate_analytics_report', base=IdempotentTask, max_retries=2)
@@ -441,4 +472,8 @@ def generate_analytics_report(chatbot_id: str, period: str = '30d') -> Dict[str,
         
     except Exception as e:
         logger.error(f"Error generating analytics report for {chatbot_id}: {str(e)}")
-        raise
+        return {
+            'status': 'failed',
+            'chatbot_id': chatbot_id,
+            'error': str(e)
+        }
