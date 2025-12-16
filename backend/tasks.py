@@ -1,10 +1,118 @@
 from celery import Task
 from backend.celery_app import celery_app
 import asyncio
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 import logging
+import hashlib
+import json
+import redis
+import time
 
 logger = logging.getLogger(__name__)
+
+# Initialize Redis client for task deduplication
+redis_client = redis.Redis.from_url(
+    celery_app.conf.broker_url,
+    decode_responses=True
+)
+
+
+class IdempotentTask(Task):
+    """
+    Base task class with idempotency support
+    Prevents duplicate task execution using Redis locks
+    """
+    
+    def generate_task_id(self, *args, **kwargs):
+        """Generate unique task ID based on task name and arguments"""
+        task_data = {
+            'task': self.name,
+            'args': args,
+            'kwargs': kwargs
+        }
+        task_string = json.dumps(task_data, sort_keys=True)
+        return hashlib.sha256(task_string.encode()).hexdigest()
+    
+    def get_lock_key(self, task_id: str) -> str:
+        """Get Redis lock key for task"""
+        return f"task_lock:{self.name}:{task_id}"
+    
+    def get_result_key(self, task_id: str) -> str:
+        """Get Redis result key for task"""
+        return f"task_result:{self.name}:{task_id}"
+    
+    def acquire_lock(self, task_id: str, timeout: int = 3600) -> bool:
+        """
+        Acquire distributed lock for task execution
+        Returns True if lock acquired, False if task already running
+        """
+        lock_key = self.get_lock_key(task_id)
+        # Use SET NX EX for atomic lock acquisition
+        return redis_client.set(lock_key, '1', nx=True, ex=timeout)
+    
+    def release_lock(self, task_id: str):
+        """Release distributed lock"""
+        lock_key = self.get_lock_key(task_id)
+        redis_client.delete(lock_key)
+    
+    def get_cached_result(self, task_id: str) -> Optional[Dict[str, Any]]:
+        """Get cached result if task already completed"""
+        result_key = self.get_result_key(task_id)
+        cached = redis_client.get(result_key)
+        if cached:
+            try:
+                return json.loads(cached)
+            except:
+                return None
+        return None
+    
+    def cache_result(self, task_id: str, result: Dict[str, Any], ttl: int = 3600):
+        """Cache task result for deduplication"""
+        result_key = self.get_result_key(task_id)
+        redis_client.setex(result_key, ttl, json.dumps(result))
+    
+    def __call__(self, *args, **kwargs):
+        """Override to add idempotency check"""
+        # Generate unique task ID
+        task_id = self.generate_task_id(*args, **kwargs)
+        
+        # Check if result already cached (task completed recently)
+        cached_result = self.get_cached_result(task_id)
+        if cached_result:
+            logger.info(f"Task {self.name} with ID {task_id} already completed, returning cached result")
+            return cached_result
+        
+        # Try to acquire lock
+        if not self.acquire_lock(task_id):
+            logger.warning(f"Task {self.name} with ID {task_id} already running, skipping duplicate execution")
+            # Wait and check for result
+            max_wait = 30  # Wait max 30 seconds
+            waited = 0
+            while waited < max_wait:
+                time.sleep(2)
+                waited += 2
+                cached_result = self.get_cached_result(task_id)
+                if cached_result:
+                    return cached_result
+            
+            return {
+                'status': 'skipped',
+                'reason': 'duplicate_task',
+                'message': 'Task already running or completed'
+            }
+        
+        try:
+            # Execute task
+            result = super().__call__(*args, **kwargs)
+            
+            # Cache successful result
+            if result and isinstance(result, dict) and result.get('status') == 'success':
+                self.cache_result(task_id, result)
+            
+            return result
+        finally:
+            # Always release lock
+            self.release_lock(task_id)
 
 
 class AsyncTask(Task):
