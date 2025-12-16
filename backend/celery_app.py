@@ -15,7 +15,7 @@ celery_app = Celery(
     include=['backend.tasks']  # Import tasks module
 )
 
-# Configuration
+# Configuration with idempotency support
 celery_app.conf.update(
     task_serializer='json',
     accept_content=['json'],
@@ -27,6 +27,15 @@ celery_app.conf.update(
     task_soft_time_limit=25 * 60,  # 25 minutes
     worker_prefetch_multiplier=4,
     worker_max_tasks_per_child=1000,
+    
+    # Idempotency and reliability configurations
+    task_acks_late=True,  # Acknowledge tasks after completion (important for idempotency)
+    worker_prefetch_multiplier=1,  # Fetch one task at a time for better reliability
+    task_reject_on_worker_lost=True,  # Reject task if worker crashes
+    task_ignore_result=False,  # Store results for idempotency checks
+    result_expires=3600,  # Keep results for 1 hour for deduplication
+    task_default_retry_delay=60,  # 1 minute retry delay
+    task_max_retries=3,  # Maximum 3 retries
 )
 
 # Optional: Configure task routes
