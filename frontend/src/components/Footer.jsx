@@ -93,7 +93,7 @@ const Footer = ({ variant = 'landing' }) => {
                 </li>
                 <li className="flex items-start text-gray-600 text-sm">
                   <Phone className="w-4 h-4 mr-2 mt-0.5 text-purple-600" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+917410521746</span>
                 </li>
               </ul>
             </div>
