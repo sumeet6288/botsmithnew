@@ -255,10 +255,10 @@ Use Cases:
 
 ### URLs
 ```
-Frontend:  https://quick-deploy-69.preview.emergentagent.com
-Backend:   https://quick-deploy-69.preview.emergentagent.com/api
-API Docs:  https://quick-deploy-69.preview.emergentagent.com/api/docs
-Health:    https://quick-deploy-69.preview.emergentagent.com/api/health
+Frontend:  https://fullstack-setup-26.preview.emergentagent.com
+Backend:   https://fullstack-setup-26.preview.emergentagent.com/api
+API Docs:  https://fullstack-setup-26.preview.emergentagent.com/api/docs
+Health:    https://fullstack-setup-26.preview.emergentagent.com/api/health
 ```
 
 ### Test the Application
@@ -533,6 +533,6 @@ redis-cli monitor
 **Setup completed on**: December 16, 2025  
 **System status**: ✅ All services running  
 **Idempotency**: ✅ Fully implemented  
-**Preview**: ✅ https://quick-deploy-69.preview.emergentagent.com  
+**Preview**: ✅ https://fullstack-setup-26.preview.emergentagent.com  
 
 🎉 **Ready for use!**
