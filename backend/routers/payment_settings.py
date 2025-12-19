@@ -116,51 +116,42 @@ async def update_payment_settings(settings: PaymentSettings):
 
 
 @router.post("/test", response_model=TestConnectionResponse)
-async def test_lemonsqueezy_connection(request: TestConnectionRequest):
+async def test_razorpay_connection(request: TestConnectionRequest):
     """
-    Test LemonSqueezy API connection
+    Test Razorpay API connection
     """
     try:
         if not request.api_key or not request.store_id:
             raise HTTPException(
                 status_code=400, 
-                detail="API key and Store ID are required"
+                detail="Key ID and Key Secret are required"
             )
         
-        # Test LemonSqueezy API connection
-        headers = {
-            "Accept": "application/vnd.api+json",
-            "Content-Type": "application/vnd.api+json",
-            "Authorization": f"Bearer {request.api_key}"
-        }
+        # Test Razorpay API connection
+        # Note: api_key = key_id, store_id = key_secret for Razorpay
+        key_id = request.api_key
+        key_secret = request.store_id
         
         async with httpx.AsyncClient() as client:
-            # Try to fetch store details
+            # Try to fetch payment methods to verify credentials
             response = await client.get(
-                f"https://api.lemonsqueezy.com/v1/stores/{request.store_id}",
-                headers=headers,
+                "https://api.razorpay.com/v1/methods",
+                auth=(key_id, key_secret),
                 timeout=10.0
             )
             
             if response.status_code == 200:
-                data = response.json()
-                store_name = data.get('data', {}).get('attributes', {}).get('name', 'Unknown Store')
                 mode_text = " (Test Mode)" if request.test_mode else " (Live Mode)"
                 
                 return TestConnectionResponse(
                     success=True,
-                    message=f"Successfully connected to LemonSqueezy!{mode_text}",
-                    store_name=store_name
+                    message=f"Successfully connected to Razorpay!{mode_text}",
+                    store_name="Razorpay Account"
                 )
             elif response.status_code == 401:
                 return TestConnectionResponse(
                     success=False,
-                    message="Invalid API key. Please check your credentials."
-                )
-            elif response.status_code == 404:
-                return TestConnectionResponse(
-                    success=False,
-                    message="Store not found. Please check your Store ID."
+                    message="Invalid API credentials. Please check your Key ID and Key Secret."
                 )
             else:
                 return TestConnectionResponse(
@@ -174,13 +165,13 @@ async def test_lemonsqueezy_connection(request: TestConnectionRequest):
             message="Connection timeout. Please check your network or try again."
         )
     except httpx.RequestError as e:
-        logger.error(f"Network error testing LemonSqueezy connection: {str(e)}")
+        logger.error(f"Network error testing Razorpay connection: {str(e)}")
         return TestConnectionResponse(
             success=False,
             message=f"Network error: {str(e)}"
         )
     except Exception as e:
-        logger.error(f"Error testing LemonSqueezy connection: {str(e)}")
+        logger.error(f"Error testing Razorpay connection: {str(e)}")
         return TestConnectionResponse(
             success=False,
             message=f"Error: {str(e)}"
