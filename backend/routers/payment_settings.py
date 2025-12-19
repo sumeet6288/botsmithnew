@@ -22,25 +22,25 @@ payment_settings_collection = db['payment_settings']
 
 
 # Models
-class LemonSqueezyPlans(BaseModel):
+class RazorpayPlans(BaseModel):
     free: str = ""
     starter: str = ""
     professional: str = ""
     enterprise: str = ""
 
 
-class LemonSqueezySettings(BaseModel):
+class RazorpaySettings(BaseModel):
     enabled: bool = False
     test_mode: bool = True
-    api_key: str = ""
-    store_id: str = ""
+    key_id: str = ""
+    key_secret: str = ""
     webhook_url: str = ""
     webhook_secret: str = ""
-    plans: LemonSqueezyPlans = Field(default_factory=LemonSqueezyPlans)
+    plans: RazorpayPlans = Field(default_factory=RazorpayPlans)
 
 
 class PaymentSettings(BaseModel):
-    lemonsqueezy: LemonSqueezySettings = Field(default_factory=LemonSqueezySettings)
+    razorpay: RazorpaySettings = Field(default_factory=RazorpaySettings)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     updated_by: Optional[str] = None
 
