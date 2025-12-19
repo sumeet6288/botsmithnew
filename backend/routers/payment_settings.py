@@ -179,73 +179,52 @@ async def test_razorpay_connection(request: TestConnectionRequest):
 
 
 @router.post("/fetch-products")
-async def fetch_lemonsqueezy_products(request: TestConnectionRequest):
+async def fetch_razorpay_plans(request: TestConnectionRequest):
     """
-    Fetch all products and variants from LemonSqueezy store
+    Fetch all plans from Razorpay account
     """
     try:
         if not request.api_key or not request.store_id:
             raise HTTPException(
                 status_code=400, 
-                detail="API key and Store ID are required"
+                detail="Key ID and Key Secret are required"
             )
         
-        headers = {
-            "Accept": "application/vnd.api+json",
-            "Content-Type": "application/vnd.api+json",
-            "Authorization": f"Bearer {request.api_key}"
-        }
+        # Note: api_key = key_id, store_id = key_secret for Razorpay
+        key_id = request.api_key
+        key_secret = request.store_id
         
         async with httpx.AsyncClient() as client:
-            # Fetch products
-            products_response = await client.get(
-                f"https://api.lemonsqueezy.com/v1/products?filter[store_id]={request.store_id}",
-                headers=headers,
+            # Fetch plans
+            response = await client.get(
+                "https://api.razorpay.com/v1/plans",
+                auth=(key_id, key_secret),
                 timeout=15.0
             )
             
-            if products_response.status_code != 200:
+            if response.status_code != 200:
                 raise HTTPException(
-                    status_code=products_response.status_code,
-                    detail="Failed to fetch products from LemonSqueezy"
+                    status_code=response.status_code,
+                    detail="Failed to fetch plans from Razorpay"
                 )
             
-            products_data = products_response.json()
-            products = []
+            plans_data = response.json()
+            plans = []
             
-            # Process each product
-            for product in products_data.get('data', []):
-                product_id = product['id']
-                product_name = product['attributes']['name']
-                
-                # Fetch variants for this product
-                variants_response = await client.get(
-                    f"https://api.lemonsqueezy.com/v1/variants?filter[product_id]={product_id}",
-                    headers=headers,
-                    timeout=15.0
-                )
-                
-                variants = []
-                if variants_response.status_code == 200:
-                    variants_data = variants_response.json()
-                    for variant in variants_data.get('data', []):
-                        variants.append({
-                            "id": variant['id'],
-                            "name": variant['attributes']['name'],
-                            "price": variant['attributes']['price'],
-                            "interval": variant['attributes'].get('interval'),
-                            "interval_count": variant['attributes'].get('interval_count')
-                        })
-                
-                products.append({
-                    "id": product_id,
-                    "name": product_name,
-                    "variants": variants
+            # Process each plan
+            for plan in plans_data.get('items', []):
+                plans.append({
+                    "id": plan.get('id'),
+                    "name": plan.get('item', {}).get('name', 'Unnamed Plan'),
+                    "amount": plan.get('item', {}).get('amount', 0) / 100,  # Convert paise to rupees
+                    "currency": plan.get('item', {}).get('currency', 'INR'),
+                    "period": plan.get('period'),
+                    "interval": plan.get('interval')
                 })
             
             return {
                 "success": True,
-                "products": products
+                "plans": plans
             }
                 
     except httpx.TimeoutException:
@@ -254,13 +233,13 @@ async def fetch_lemonsqueezy_products(request: TestConnectionRequest):
             detail="Request timeout. Please try again."
         )
     except httpx.RequestError as e:
-        logger.error(f"Network error fetching products: {str(e)}")
+        logger.error(f"Network error fetching plans: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Network error: {str(e)}"
         )
     except Exception as e:
-        logger.error(f"Error fetching products: {str(e)}")
+        logger.error(f"Error fetching plans: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"Error: {str(e)}"
