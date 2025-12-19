@@ -204,7 +204,7 @@ const SubscriptionNew = () => {
       const userResponse = await axios.get(`${BACKEND_URL}/api/auth/me`, { headers });
       const userData = userResponse.data;
       
-      // Create LemonSqueezy checkout
+      // Create Razorpay subscription
       const response = await axios.post(
         `${BACKEND_URL}/api/razorpay/create-subscription`,
         {
@@ -217,7 +217,7 @@ const SubscriptionNew = () => {
       );
 
       if (response.data.success && response.data.checkout_url) {
-        // Redirect to LemonSqueezy checkout
+        // Redirect to Razorpay checkout
         window.location.href = response.data.checkout_url;
       } else {
         throw new Error('Failed to create checkout');
