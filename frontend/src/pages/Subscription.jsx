@@ -164,7 +164,7 @@ const SubscriptionNew = () => {
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
       
       const response = await axios.post(
-        `${BACKEND_URL}/api/lemonsqueezy/subscription/sync`,
+        `${BACKEND_URL}/api/razorpay/subscription/sync`,
         {},
         { headers }
       );
@@ -206,7 +206,7 @@ const SubscriptionNew = () => {
       
       // Create LemonSqueezy checkout
       const response = await axios.post(
-        `${BACKEND_URL}/api/lemonsqueezy/create-checkout`,
+        `${BACKEND_URL}/api/razorpay/create-subscription`,
         {
           plan_id: planId,
           user_id: userData.user_id,
