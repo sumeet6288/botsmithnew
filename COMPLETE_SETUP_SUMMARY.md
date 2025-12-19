@@ -140,7 +140,7 @@ CELERY_RESULT_BACKEND="redis://localhost:6379/0"
 
 ### Frontend (.env)
 ```bash
-REACT_APP_BACKEND_URL=https://fullstack-setup-26.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://mongo-init-1.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 REACT_APP_ENABLE_VISUAL_EDITS=true
 ENABLE_HEALTH_CHECK=false
@@ -189,10 +189,10 @@ ENABLE_HEALTH_CHECK=false
 
 | Service | URL |
 |---------|-----|
-| **Frontend** | https://fullstack-setup-26.preview.emergentagent.com |
-| **Backend API** | https://fullstack-setup-26.preview.emergentagent.com/api |
-| **API Docs (Swagger)** | https://fullstack-setup-26.preview.emergentagent.com/api/docs |
-| **Health Check** | https://fullstack-setup-26.preview.emergentagent.com/api/health |
+| **Frontend** | https://mongo-init-1.preview.emergentagent.com |
+| **Backend API** | https://mongo-init-1.preview.emergentagent.com/api |
+| **API Docs (Swagger)** | https://mongo-init-1.preview.emergentagent.com/api/docs |
+| **Health Check** | https://mongo-init-1.preview.emergentagent.com/api/health |
 
 ---
 
@@ -317,10 +317,10 @@ celery -A backend.celery_app purge
 ## 🚀 What You Can Do Now
 
 ### 1. Access the Application
-Visit: https://fullstack-setup-26.preview.emergentagent.com
+Visit: https://mongo-init-1.preview.emergentagent.com
 
 ### 2. Test API
-View API docs: https://fullstack-setup-26.preview.emergentagent.com/api/docs
+View API docs: https://mongo-init-1.preview.emergentagent.com/api/docs
 
 ### 3. Use Background Tasks
 ```python
@@ -434,7 +434,7 @@ mongosh --eval "db.adminCommand('ping')"
 
 - **Celery Setup Guide**: `/app/CELERY_REDIS_SETUP.md`
 - **Test Script**: `/app/test_celery_integration.py`
-- **API Documentation**: https://fullstack-setup-26.preview.emergentagent.com/api/docs
+- **API Documentation**: https://mongo-init-1.preview.emergentagent.com/api/docs
 
 ---
 
