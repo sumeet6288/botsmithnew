@@ -68,10 +68,23 @@ const NotificationCenter = ({ onClose }) => {
     if (!notification.read) {
       markAsRead(notification.id);
     }
+    
+    // Only navigate if action_url exists and is valid
     if (notification.action_url) {
-      navigate(notification.action_url);
-      onClose();
+      try {
+        // Validate the URL - check if it starts with / (internal route)
+        const url = notification.action_url.trim();
+        if (url && url.startsWith('/')) {
+          navigate(url);
+          onClose();
+        } else {
+          console.warn('Invalid action_url:', notification.action_url);
+        }
+      } catch (error) {
+        console.error('Error navigating to notification URL:', error);
+      }
     }
+    // If no action_url, just mark as read (no navigation needed)
   };
 
   const getNotificationIcon = (type, priority) => {
