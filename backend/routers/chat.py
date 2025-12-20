@@ -101,7 +101,7 @@ async def send_message(chat_request: ChatRequest):
                         "user_name": chat_request.user_name,
                         "user_email": chat_request.user_email
                     },
-                    action_url=f"/chatbot-builder/{chat_request.chatbot_id}?tab=analytics"
+                    action_url=f"/chatbot/{chat_request.chatbot_id}?tab=analytics"
                 )
             )
         else:
