@@ -15,11 +15,18 @@ from supabase_config import (
     SUPABASE_URL
 )
 from models import User
-from database import get_database
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/auth/supabase", tags=["Supabase Auth"])
+
+# Database will be injected
+db = None
+
+def init_router(database):
+    """Initialize router with database connection."""
+    global db
+    db = database
 
 
 class SupabaseAuthResponse(BaseModel):
