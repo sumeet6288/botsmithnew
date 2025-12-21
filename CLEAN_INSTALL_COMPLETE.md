@@ -121,7 +121,7 @@ EMERGENT_LLM_KEY=sk-emergent-919922434748629944
 
 **Frontend Environment (`.env`):**
 ```
-REACT_APP_BACKEND_URL=https://mongodb-setup-1.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://clean-mongodb.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 ```
 
@@ -130,7 +130,7 @@ WDS_SOCKET_PORT=443
 ## 🌐 Application Access
 
 ### Preview URL
-**Live Application:** https://mongodb-setup-1.preview.emergentagent.com
+**Live Application:** https://clean-mongodb.preview.emergentagent.com
 
 ### API Documentation
 **Swagger UI:** http://localhost:8001/api/docs
