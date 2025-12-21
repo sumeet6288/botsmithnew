@@ -147,7 +147,6 @@ async def get_current_user_from_supabase(
         user_info = get_user_from_token(token)
         
         # Get user from local database
-        db = get_database()
         users_collection = db["users"]
         user = await users_collection.find_one({"supabase_user_id": user_info["user_id"]})
         
