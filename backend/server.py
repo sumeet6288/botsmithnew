@@ -172,6 +172,7 @@ api_router.include_router(payment_settings.router)
 api_router.include_router(admin_settings.router, prefix="/admin/settings", tags=["Admin Settings"])
 api_router.include_router(admin_direct_login.router, tags=["Admin Direct Login"])
 api_router.include_router(admin_subscriptions.router, tags=["Admin Subscriptions"])
+api_router.include_router(supabase_auth.router, tags=["Supabase Auth"])
 
 # Include the router in the main app
 app.include_router(api_router)
