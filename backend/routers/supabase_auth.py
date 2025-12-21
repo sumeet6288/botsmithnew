@@ -68,7 +68,6 @@ async def verify_and_sync_user(request: SupabaseTokenRequest):
         # Verify token and get user info
         user_info = get_user_from_token(request.token)
         
-        db = get_database()
         users_collection = db["users"]
         
         # Check if user exists in local database
