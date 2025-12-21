@@ -18,7 +18,7 @@ from models import User
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/auth/supabase", tags=["Supabase Auth"])
+router = APIRouter(prefix="/auth/supabase", tags=["Supabase Auth"])
 
 # Database will be injected
 db = None
