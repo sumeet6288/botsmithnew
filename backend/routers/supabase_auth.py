@@ -8,14 +8,14 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 import logging
 
-from ..supabase_config import (
+from supabase_config import (
     verify_supabase_token,
     get_user_from_token,
     is_supabase_enabled,
     SUPABASE_URL
 )
-from ..models import User
-from ..database import get_database
+from models import User
+from database import get_database
 
 logger = logging.getLogger(__name__)
 
