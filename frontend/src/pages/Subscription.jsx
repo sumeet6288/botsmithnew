@@ -456,7 +456,15 @@ const SubscriptionNew = () => {
 
                 {/* Card */}
                 <div className={`h-full bg-white rounded-xl border-2 hover:shadow-lg transition-all duration-300 ${
-                  isPopular ? 'border-purple-500' : currentPlan ? 'border-green-500' : 'border-gray-200'
+                  isPopular 
+                    ? 'border-purple-500' 
+                    : currentPlan && subscriptionStatus?.is_expired
+                      ? 'border-red-500'
+                      : currentPlan && subscriptionStatus?.is_expiring_soon
+                        ? 'border-orange-500'
+                        : currentPlan 
+                          ? 'border-green-500' 
+                          : 'border-gray-200'
                 }`}>
                   {/* Header */}
                   <div className="p-5 border-b border-gray-100">
