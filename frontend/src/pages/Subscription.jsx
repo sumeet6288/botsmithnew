@@ -18,6 +18,7 @@ const SubscriptionNew = () => {
   const [checkingOut, setCheckingOut] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [syncing, setSyncing] = useState(false);
+  const [renewing, setRenewing] = useState(false);
 
   // Define plans matching the Pricing page
   const plans = [
