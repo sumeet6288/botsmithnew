@@ -395,14 +395,38 @@ const SubscriptionNew = () => {
               <div className={`mt-3 p-3 rounded-lg ${
                 subscriptionStatus.is_expired ? 'bg-red-100' : 'bg-orange-100'
               }`}>
-                <p className={`text-sm font-medium ${
-                  subscriptionStatus.is_expired ? 'text-red-900' : 'text-orange-900'
-                }`}>
-                  {subscriptionStatus.is_expired 
-                    ? '⚠️ Your subscription has expired. Renew now to continue using all features.'
-                    : `⏰ Your subscription is expiring in ${subscriptionStatus.days_remaining} ${subscriptionStatus.days_remaining === 1 ? 'day' : 'days'}!`
-                  }
-                </p>
+                <div className="flex items-start justify-between gap-3">
+                  <p className={`text-sm font-medium flex-1 ${
+                    subscriptionStatus.is_expired ? 'text-red-900' : 'text-orange-900'
+                  }`}>
+                    {subscriptionStatus.is_expired 
+                      ? '⚠️ Your subscription has expired. Renew now to continue using all features.'
+                      : `⏰ Your subscription is expiring in ${subscriptionStatus.days_remaining} ${subscriptionStatus.days_remaining === 1 ? 'day' : 'days'}!`
+                    }
+                  </p>
+                  {/* Renew Now Button */}
+                  <Button
+                    onClick={handleRenewSubscription}
+                    disabled={renewing}
+                    className={`${
+                      subscriptionStatus.is_expired 
+                        ? 'bg-red-600 hover:bg-red-700' 
+                        : 'bg-orange-600 hover:bg-orange-700'
+                    } text-white rounded-lg px-4 py-2 text-sm font-semibold flex items-center gap-2 whitespace-nowrap`}
+                  >
+                    {renewing ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Renewing...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="w-4 h-4" />
+                        Renew Now
+                      </>
+                    )}
+                  </Button>
+                </div>
               </div>
             )}
           </div>
