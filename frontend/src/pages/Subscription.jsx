@@ -181,6 +181,35 @@ const SubscriptionNew = () => {
     }
   };
 
+  const handleRenewSubscription = async () => {
+    if (renewing) return;
+    
+    try {
+      setRenewing(true);
+      const token = localStorage.getItem('token');
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      
+      const response = await axios.post(
+        `${BACKEND_URL}/api/plans/renew`,
+        {},
+        { headers }
+      );
+      
+      console.log('Subscription renewed:', response.data);
+      
+      // Show success message
+      alert('🎉 Subscription renewed successfully for 30 days!');
+      
+      // Refresh subscription status
+      await fetchData();
+    } catch (error) {
+      console.error('Error renewing subscription:', error);
+      alert(error.response?.data?.detail || 'Failed to renew subscription. Please try again or contact support.');
+    } finally {
+      setRenewing(false);
+    }
+  };
+
   const handleCheckout = async (planId) => {
     if (checkingOut) return;
 
