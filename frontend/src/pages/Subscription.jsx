@@ -486,24 +486,48 @@ const SubscriptionNew = () => {
                     </ul>
 
                     {/* CTA Button */}
-                    <Button 
-                      className={`w-full py-2 rounded-lg text-sm font-medium transition-all ${
-                        isFree || currentPlan
-                          ? 'border border-gray-300 bg-gray-100 text-gray-500 cursor-not-allowed'
-                          : `bg-gradient-to-r ${plan.gradient} hover:opacity-90 text-white border-0`
-                      }`}
-                      onClick={() => handleCheckout(plan.id)}
-                      disabled={isFree || currentPlan || checkingOut !== null}
-                    >
-                      {checkingOut === plan.id ? (
-                        <>
-                          <Loader2 className="w-3 h-3 animate-spin mr-1.5 inline" />
-                          Processing...
-                        </>
-                      ) : (
-                        currentPlan ? '✓ Current Plan' : plan.cta
-                      )}
-                    </Button>
+                    {currentPlan && (subscriptionStatus?.is_expired || subscriptionStatus?.is_expiring_soon) ? (
+                      <Button 
+                        className={`w-full py-2 rounded-lg text-sm font-medium transition-all ${
+                          subscriptionStatus?.is_expired 
+                            ? 'bg-gradient-to-r from-red-500 to-red-600 hover:opacity-90 text-white border-0' 
+                            : 'bg-gradient-to-r from-orange-500 to-orange-600 hover:opacity-90 text-white border-0'
+                        }`}
+                        onClick={handleRenewSubscription}
+                        disabled={renewing}
+                      >
+                        {renewing ? (
+                          <>
+                            <Loader2 className="w-3 h-3 animate-spin mr-1.5 inline" />
+                            Renewing...
+                          </>
+                        ) : (
+                          <>
+                            <RefreshCw className="w-3 h-3 mr-1.5 inline" />
+                            Renew Now
+                          </>
+                        )}
+                      </Button>
+                    ) : (
+                      <Button 
+                        className={`w-full py-2 rounded-lg text-sm font-medium transition-all ${
+                          isFree || currentPlan
+                            ? 'border border-gray-300 bg-gray-100 text-gray-500 cursor-not-allowed'
+                            : `bg-gradient-to-r ${plan.gradient} hover:opacity-90 text-white border-0`
+                        }`}
+                        onClick={() => handleCheckout(plan.id)}
+                        disabled={isFree || currentPlan || checkingOut !== null}
+                      >
+                        {checkingOut === plan.id ? (
+                          <>
+                            <Loader2 className="w-3 h-3 animate-spin mr-1.5 inline" />
+                            Processing...
+                          </>
+                        ) : (
+                          currentPlan ? '✓ Current Plan' : plan.cta
+                        )}
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
