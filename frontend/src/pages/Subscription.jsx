@@ -454,6 +454,24 @@ const SubscriptionNew = () => {
                   </div>
                 )}
 
+                {/* Expiration Badge for Current Plan */}
+                {currentPlan && subscriptionStatus?.is_expired && (
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                    <span className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      Expired
+                    </span>
+                  </div>
+                )}
+                {currentPlan && subscriptionStatus?.is_expiring_soon && !subscriptionStatus?.is_expired && (
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                    <span className="bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      Expiring Soon
+                    </span>
+                  </div>
+                )}
+
                 {/* Card */}
                 <div className={`h-full bg-white rounded-xl border-2 hover:shadow-lg transition-all duration-300 ${
                   isPopular 
