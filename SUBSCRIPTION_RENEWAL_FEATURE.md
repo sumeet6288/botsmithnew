@@ -281,7 +281,7 @@ Plan Card:
 ```
 
 ## 🔗 Preview URL
-**Application**: https://sub-model-advance.preview.emergentagent.com
+**Application**: https://clean-deploy-46.preview.emergentagent.com
 
 **Test Credentials**:
 - Email: admin@botsmith.com
