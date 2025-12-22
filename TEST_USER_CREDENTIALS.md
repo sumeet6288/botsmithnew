@@ -7,7 +7,7 @@ Created a test user with a subscription that expires in **3 days** to demonstrat
 
 ## 🔑 Login Credentials
 
-**URL**: https://clean-deploy-46.preview.emergentagent.com/signin
+**URL**: https://renewal-tester.preview.emergentagent.com/signin
 
 **Email**: `testuser@botsmith.com`  
 **Password**: `test123`
@@ -281,7 +281,7 @@ EOF
 
 ## 🚀 Quick Start
 
-1. **Open Browser**: https://clean-deploy-46.preview.emergentagent.com/signin
+1. **Open Browser**: https://renewal-tester.preview.emergentagent.com/signin
 2. **Login**: testuser@botsmith.com / test123
 3. **Observe**: Dashboard with orange expiring warning
 4. **Test**: Click "Renew Now" and verify renewal works

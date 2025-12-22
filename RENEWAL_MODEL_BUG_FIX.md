@@ -263,7 +263,7 @@ curl http://localhost:8001/api/health
 ```
 
 ### **Application URL**
-https://clean-deploy-46.preview.emergentagent.com
+https://renewal-tester.preview.emergentagent.com
 
 ---
 
@@ -332,7 +332,7 @@ The subscription renewal model bug has been **COMPLETELY FIXED**. Users can now 
 
 ### **Testing**
 To test the renewal functionality:
-1. Login at https://clean-deploy-46.preview.emergentagent.com
+1. Login at https://renewal-tester.preview.emergentagent.com
 2. Credentials: admin@botsmith.com / admin123
 3. Navigate to Subscription page
 4. Observe "Expiring Soon" warning (2 days remaining)
