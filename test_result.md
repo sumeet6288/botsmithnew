@@ -296,6 +296,18 @@ user_problem_statement: "✅ CLEAN INSTALL COMPLETE + RENEWAL MODEL FIXED (2025-
 user_problem_statement_original: Complete chatbot builder application with all pending features including multi-provider AI support, file uploads, website scraping, and real-time chat
 
 backend:
+  - task: "Subscription Renewal Model - Critical Bug Fix Testing"
+    implemented: true
+    working: true
+    file: "/app/backend/services/plan_service.py, /app/backend/routers/plans.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE SUBSCRIPTION RENEWAL TESTING COMPLETE (2025-12-22): Conducted thorough testing of subscription renewal model with 2 test users as requested. 🎯 CRITICAL BUG FIX VERIFIED: The renewal logic is working correctly - active subscriptions extend from current_expires_at + 30 days (preserving remaining days), expired subscriptions start fresh from now + 30 days. ✅ TEST RESULTS (46/46 tests passed - 100% success rate): 1) SUBSCRIPTION STATUS API (/api/plans/subscription-status): User1 shows is_expiring_soon=true, days_remaining=2, User2 shows is_expired=true, status=expired. 2) RENEWAL LOGIC (/api/plans/renew): User1 (2 days remaining) correctly extended from current expiration (2025-12-25 → 2026-01-24), preserving remaining days. User2 (expired 5 days ago) correctly started fresh from now (2026-01-21). 3) GET SUBSCRIPTION API (/api/plans/current): Both users can retrieve subscription details with all required fields (plan_id, status, started_at, expires_at, usage). 4) USAGE STATS API (/api/plans/usage): Both users return proper usage data with limits from plan (chatbots, messages, file_uploads, website_sources, text_sources). 5) EDGE CASES: Multiple renewals work correctly (extends further), usage counters preserved (not reset), billing_cycle remains 'monthly', status updates to 'active'. 🔧 TEST USERS VERIFIED: user1@test.com (Starter plan, was expiring in 2 days, now renewed), user2@test.com (Starter plan, was expired 5 days ago, now renewed). All APIs responding correctly with proper authentication, data validation, and business logic implementation."
+
   - task: "Chatbot CRUD operations"
     implemented: true
     working: true
