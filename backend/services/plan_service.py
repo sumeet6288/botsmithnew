@@ -385,9 +385,20 @@ class PlanService:
         """Renew user's current subscription for another month"""
         subscription = await self.get_user_subscription(user_id)
         
-        # Calculate new expiration date - 30 days from now
-        started_at = datetime.utcnow()
-        expires_at = started_at + timedelta(days=30)
+        now = datetime.utcnow()
+        current_expires_at = subscription.get("expires_at")
+        
+        # Calculate new expiration date
+        # If subscription is expired or has no expiration, start from now
+        # If subscription is still active, extend from current expiration date
+        if not current_expires_at or now > current_expires_at:
+            # Subscription is expired or no expiration set - start from now
+            expires_at = now + timedelta(days=30)
+            started_at = now
+        else:
+            # Subscription is still active - extend from current expiration
+            expires_at = current_expires_at + timedelta(days=30)
+            started_at = subscription.get("started_at", now)  # Keep original start date
         
         # Update subscription
         update_data = {
